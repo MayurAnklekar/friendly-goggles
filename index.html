@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAANG Prep — Master Plan 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&display=swap');
+:root{
+  --bg:#0a0b0d;--surf:#121416;--surf2:#1a1c20;--surf3:#222529;
+  --border:#252830;--border2:#2e3138;
+  --text:#dde2ec;--muted:#5a6070;--dim:#3a4050;
+  --dsa:#4ade80;--dsa-bg:#0d2818;--dsa-border:#1a4a2a;
+  --lld:#fb923c;--lld-bg:#200d00;--lld-border:#4a2000;
+  --hld:#60a5fa;--hld-bg:#081a30;--hld-border:#0a3060;
+  --contest:#e879f9;--contest-bg:#1f0820;
+  --mock:#facc15;--mock-bg:#1f1400;
+  --red:#f87171;--green:#4ade80;--accent:#a78bfa;--accent2:#7c3aed;
+  --star:#fbbf24;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6}
+
+/* NAV */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(10,11,13,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0;padding:0 24px;height:48px}
+.topnav-brand{font-family:'Fraunces',serif;font-size:1rem;font-weight:900;color:#fff;margin-right:24px;white-space:nowrap}
+.topnav-brand span{color:var(--accent)}
+.nav-btn{padding:0 16px;height:48px;display:flex;align-items:center;font-size:0.67rem;font-weight:600;letter-spacing:0.06em;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{color:var(--text)}
+.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-spacer{flex:1}
+.apply-chip{background:linear-gradient(135deg,var(--accent2),var(--accent));padding:5px 14px;border-radius:20px;font-size:0.63rem;font-weight:700;color:#fff;letter-spacing:0.06em}
+
+/* PAGES */
+.page{display:none;min-height:calc(100vh - 48px)}
+.page.active{display:block}
+
+/* ═══ PAGE: WEEKLY PLAN ═══ */
+.hero{padding:36px 32px 28px;background:linear-gradient(135deg,#0a0b0d 0%,#130d2a 50%,#0a0b0d 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(124,58,237,.12) 0%,transparent 70%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:24px}
+.hero-title{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;line-height:1.1;color:#fff}
+.hero-title em{color:var(--accent);font-style:italic}
+.hero-sub{font-size:0.65rem;color:var(--muted);margin-top:8px;letter-spacing:.04em}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.hstat{background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;text-align:center}
+.hstat-n{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;line-height:1}
+.hstat-l{font-size:.58rem;color:var(--muted);margin-top:3px;letter-spacing:.05em}
+.hero-legend{display:flex;flex-wrap:wrap;gap:16px}
+.leg{display:flex;align-items:center;gap:6px;font-size:.65rem;color:var(--muted)}
+.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* Rhythm bar */
+.rhythm{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:16px 32px;background:var(--surf);border-bottom:1px solid var(--border)}
+.rday{padding:10px 8px;border-radius:6px;border:1px solid var(--border2);font-size:.58rem;line-height:1.7}
+.rday-label{font-weight:700;font-size:.62rem;color:var(--muted);letter-spacing:.05em;margin-bottom:4px}
+.chip{display:inline-block;padding:1px 5px;border-radius:3px;font-size:.56rem;font-weight:700;margin:1px 1px 0 0;letter-spacing:.03em}
+
+/* Week tabs */
+.wtabs-wrap{padding:16px 32px 0;overflow-x:auto;background:var(--surf);border-bottom:1px solid var(--border)}
+.wtabs{display:flex;gap:3px;min-width:max-content;padding-bottom:0}
+.wtab{padding:7px 14px;font-size:.63rem;font-weight:600;color:var(--muted);cursor:pointer;border-radius:5px 5px 0 0;border:1px solid transparent;border-bottom:none;transition:all .12s;position:relative;bottom:-1px;white-space:nowrap}
+.wtab:hover{color:var(--text);background:var(--bg)}
+.wtab.active{color:var(--text);background:var(--bg);border-color:var(--border);border-bottom-color:var(--bg)}
+.wtab .wn{color:var(--accent);margin-right:3px}
+.wtab.milestone{border-top:2px solid var(--accent)}
+
+/* Week panels */
+.wpanels{background:var(--bg)}
+.wpanel{display:none;padding:24px 32px 32px}
+.wpanel.active{display:block}
+.wph{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.wp-title{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;font-style:italic;color:#fff}
+.wp-dates{font-size:.63rem;color:var(--muted);margin-top:3px}
+.wp-focus{font-size:.62rem;color:var(--accent);border:1px solid rgba(167,139,250,.3);padding:4px 12px;border-radius:20px}
+
+.wcols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+@media(max-width:900px){.wcols{grid-template-columns:1fr}}
+.wbot{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:700px){.wbot{grid-template-columns:1fr}}
+
+/* Cards */
+.card{background:var(--surf);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
+.ch{padding:10px 14px;font-size:.65rem;font-weight:700;letter-spacing:.07em;display:flex;align-items:center;gap:7px}
+.ch .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ch .hrs{margin-left:auto;font-weight:400;color:var(--muted);font-size:.6rem}
+.dsa.ch,.dsa .ch{background:var(--dsa-bg);color:var(--dsa);border-bottom:1px solid var(--dsa-border)}
+.dsa.ch .dot,.dsa .ch .dot{background:var(--dsa)}
+.lld.ch,.lld .ch{background:var(--lld-bg);color:var(--lld);border-bottom:1px solid var(--lld-border)}
+.lld.ch .dot,.lld .ch .dot{background:var(--lld)}
+.hld.ch,.hld .ch{background:var(--hld-bg);color:var(--hld);border-bottom:1px solid var(--hld-border)}
+.hld.ch .dot,.hld .ch .dot{background:var(--hld)}
+.contest.ch,.contest .ch{background:var(--contest-bg);color:var(--contest);border-bottom:1px solid #4a1a4a}
+.contest.ch .dot{background:var(--contest)}
+.mock.ch,.mock .ch{background:var(--mock-bg);color:var(--mock);border-bottom:1px solid #4a3500}
+.mock.ch .dot{background:var(--mock)}
+
+.cb{padding:12px 14px 14px}
+.slabel{font-size:.57rem;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin:10px 0 5px}
+.slabel:first-child{margin-top:0}
+.probs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:2px}
+.prob{display:flex;align-items:center;gap:3px;padding:3px 7px;border-radius:4px;font-size:.59rem;background:var(--surf2);border:1px solid var(--border2);transition:border-color .1s;cursor:default}
+.prob:hover{border-color:var(--dim)}
+.prob .lc{color:var(--muted);font-size:.53rem}
+.prob.hi{border-left:2px solid var(--red)}
+.prob.md{border-left:2px solid var(--mock)}
+.note{font-size:.6rem;color:var(--muted);line-height:1.65;padding:7px 9px;background:var(--surf2);border-radius:5px;border-left:2px solid var(--border2);margin-top:7px}
+.note.accent{border-left-color:var(--accent)}
+.step{font-size:.6rem;color:var(--text);line-height:1.7;padding:3px 0;border-bottom:1px solid var(--border);display:flex;gap:7px}
+.step:last-child{border-bottom:none}
+.sn{color:var(--accent);font-weight:700;flex-shrink:0;width:14px}
+
+/* Milestone banner */
+.mbanner{background:linear-gradient(135deg,#160d30,#081830);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;margin-top:14px;display:flex;align-items:center;gap:14px;font-size:.65rem}
+.mbanner .icon{font-size:1.4rem;flex-shrink:0}
+.mbanner strong{color:var(--accent);display:block;margin-bottom:3px;font-size:.7rem}
+.mbanner p{color:var(--muted);line-height:1.6}
+
+/* ═══ PAGE: TRACKER ═══ */
+.tracker-wrap{padding:28px 32px}
+.tracker-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.tracker-title{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;font-style:italic;color:#fff}
+.progress-bar-wrap{background:var(--surf2);border-radius:20px;height:6px;margin-bottom:4px;overflow:hidden}
+.progress-bar{height:100%;border-radius:20px;transition:width .5s ease}
+.prog-label{font-size:.58rem;color:var(--muted)}
+.progress-section{background:var(--surf);border:1px solid var(--border2);border-radius:10px;margin-bottom:16px;overflow:hidden}
+.ps-head{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.ps-head:hover{background:var(--surf2)}
+.ps-title{font-size:.7rem;font-weight:700;letter-spacing:.05em;display:flex;align-items:center;gap:8px}
+.ps-count{font-size:.63rem;color:var(--muted)}
+.ps-body{padding:4px 16px 14px;border-top:1px solid var(--border)}
+.check-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px;margin-top:8px}
+.check-item{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:5px;cursor:pointer;transition:background .1s}
+.check-item:hover{background:var(--surf2)}
+.check-item input[type=checkbox]{width:14px;height:14px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.check-item label{font-size:.6rem;color:var(--text);cursor:pointer;line-height:1.4}
+.check-item label .lc-tag{color:var(--muted);font-size:.55rem}
+.check-item.done label{color:var(--muted);text-decoration:line-through}
+.reset-btn{font-size:.6rem;color:var(--muted);background:none;border:1px solid var(--border2);padding:4px 10px;border-radius:4px;cursor:pointer;transition:all .1s}
+.reset-btn:hover{border-color:var(--red);color:var(--red)}
+.overall-progress{background:var(--surf);border:1px solid var(--border2);border-radius:10px;padding:16px;margin-bottom:20px}
+.op-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.op-item{text-align:center}
+.op-n{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700}
+.op-l{font-size:.58rem;color:var(--muted);margin-top:2px;letter-spacing:.04em}
+
+/* ═══ PAGE: REAL QUESTIONS ═══ */
+.iq-wrap{padding:28px 32px}
+.iq-header{margin-bottom:24px}
+.iq-title{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;font-style:italic;color:#fff;margin-bottom:6px}
+.iq-sub{font-size:.63rem;color:var(--muted)}
+.company-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.ctab{padding:6px 16px;border-radius:20px;font-size:.63rem;font-weight:600;letter-spacing:.05em;cursor:pointer;border:1px solid var(--border2);color:var(--muted);transition:all .15s}
+.ctab:hover{color:var(--text);border-color:var(--dim)}
+.ctab.active{color:#fff;border-color:transparent}
+.ctab[data-co=google].active{background:#1a4a28;color:#4ade80;border-color:#2a6a38}
+.ctab[data-co=uber].active{background:#2a1a00;color:#fb923c;border-color:#4a3000}
+.ctab[data-co=atlassian].active{background:#081830;color:#60a5fa;border-color:#0a3060}
+.ctab[data-co=meta].active{background:#0a1a30;color:#818cf8;border-color:#1a3060}
+.ctab[data-co=amazon].active{background:#1a0a00;color:#f97316;border-color:#3a1a00}
+.ctab[data-co=all].active{background:var(--surf2);color:var(--text);border-color:var(--dim)}
+
+.company-panel{display:none}
+.company-panel.active{display:block}
+.iq-card{background:var(--surf);border:1px solid var(--border2);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.iq-head{padding:12px 16px;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid var(--border)}
+.iq-badge{padding:3px 10px;border-radius:20px;font-size:.58rem;font-weight:700;letter-spacing:.05em;flex-shrink:0;margin-top:2px}
+.iq-body{padding:12px 16px}
+.iq-question{font-size:.68rem;color:var(--text);font-weight:600;line-height:1.5;margin-bottom:8px}
+.iq-pattern{font-size:.6rem;color:var(--muted);margin-bottom:6px}
+.iq-pattern span{color:var(--accent);margin-left:4px}
+.iq-source{font-size:.57rem;color:var(--muted);display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.source-badge{padding:2px 7px;border-radius:3px;font-size:.54rem;font-weight:600;background:var(--surf2);border:1px solid var(--border2);color:var(--muted)}
+.iq-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.iq-tag{padding:2px 7px;border-radius:3px;font-size:.56rem;background:var(--surf2);border:1px solid var(--border2);color:var(--dim)}
+.round-badge{font-size:.58rem;padding:2px 7px;border-radius:3px;background:var(--surf2);color:var(--muted);border:1px solid var(--border2)}
+.lld-badge{background:var(--lld-bg);color:var(--lld);border-color:var(--lld-border)}
+.hld-badge{background:var(--hld-bg);color:var(--hld);border-color:var(--hld-border)}
+.dsa-badge{background:var(--dsa-bg);color:var(--dsa);border-color:var(--dsa-border)}
+
+/* ═══ PAGE: BEHAVIORAL ═══ */
+.beh-wrap{padding:28px 32px}
+.beh-title{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;font-style:italic;color:#fff;margin-bottom:6px}
+.beh-sub{font-size:.63rem;color:var(--muted);margin-bottom:24px}
+.star-framework{background:linear-gradient(135deg,#160d30,#0a0b0d);border:1px solid rgba(167,139,250,.3);border-radius:10px;padding:20px;margin-bottom:20px}
+.sf-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:14px}
+.star-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.star-item{background:var(--surf);border-radius:8px;padding:12px;border:1px solid var(--border2)}
+.star-letter{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:var(--star);line-height:1}
+.star-word{font-size:.65rem;font-weight:700;color:var(--text);margin:4px 0 2px}
+.star-desc{font-size:.58rem;color:var(--muted);line-height:1.6}
+.beh-section{background:var(--surf);border:1px solid var(--border2);border-radius:10px;margin-bottom:14px;overflow:hidden}
+.beh-sh{padding:12px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.beh-sh:hover{background:var(--surf2)}
+.beh-sh-title{font-size:.68rem;font-weight:700;color:var(--text)}
+.beh-sh-week{font-size:.58rem;color:var(--muted);margin-top:2px}
+.beh-body{padding:4px 16px 16px;border-top:1px solid var(--border)}
+.story-card{background:var(--surf2);border:1px solid var(--border2);border-radius:8px;padding:12px;margin-top:8px}
+.sc-title{font-size:.65rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.sc-prompt{font-size:.6rem;color:var(--muted);margin-bottom:8px;font-style:italic;padding:5px 8px;background:var(--surf);border-radius:4px;border-left:2px solid var(--accent)}
+.sc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+.sc-field{background:var(--surf);border-radius:5px;padding:8px 10px;border:1px solid var(--border)}
+.sc-field-label{font-size:.55rem;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.sc-field textarea{width:100%;background:none;border:none;outline:none;color:var(--text);font-family:inherit;font-size:.6rem;line-height:1.6;resize:vertical;min-height:50px}
+.articulation-tip{background:var(--dsa-bg);border:1px solid var(--dsa-border);border-radius:8px;padding:12px;margin-top:10px}
+.at-title{font-size:.63rem;font-weight:700;color:var(--dsa);margin-bottom:6px}
+.at-item{font-size:.6rem;color:var(--muted);padding:3px 0;border-bottom:1px solid var(--dsa-border);display:flex;gap:6px;line-height:1.5}
+.at-item:last-child{border-bottom:none}
+.at-bullet{color:var(--dsa);flex-shrink:0}
+.week-schedule{margin-top:10px}
+.ws-row{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid var(--border);font-size:.6rem;align-items:flex-start}
+.ws-row:last-child{border-bottom:none}
+.ws-day{color:var(--accent);font-weight:700;width:60px;flex-shrink:0}
+.ws-task{color:var(--text);line-height:1.5}
+
+/* REFERRAL */
+.referral-card{background:linear-gradient(135deg,#0d2818,#081a10);border:1px solid #1a5a28;border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;gap:14px}
+.ref-icon{font-size:1.6rem;flex-shrink:0}
+.ref-title{font-size:.72rem;font-weight:700;color:var(--dsa);margin-bottom:6px}
+.ref-body{font-size:.62rem;color:var(--muted);line-height:1.7}
+.ref-body strong{color:var(--text)}
+.ref-template{background:var(--surf);border:1px solid var(--border2);border-radius:6px;padding:10px 12px;margin-top:10px;font-size:.6rem;color:var(--text);line-height:1.8;font-style:italic}
+
+/* Shared */
+.toggle-icon{color:var(--muted);transition:transform .2s;font-size:.8rem}
+.collapsed .toggle-icon{transform:rotate(-90deg)}
+.collapsed .ps-body,.collapsed .beh-body{display:none}
+.tag-hard{background:#2a0a0a;color:var(--red);border:1px solid #4a1a1a;padding:2px 6px;border-radius:3px;font-size:.54rem;font-weight:600}
+.tag-med{background:#1a1500;color:var(--mock);border:1px solid #3a2800;padding:2px 6px;border-radius:3px;font-size:.54rem;font-weight:600}
+.tag-easy{background:#0a1f0a;color:var(--dsa);border:1px solid #1a3a1a;padding:2px 6px;border-radius:3px;font-size:.54rem;font-weight:600}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-brand">FAANG <span>Prep</span></div>
+  <div class="nav-btn active" onclick="showPage('plan',this)">📅 Weekly Plan</div>
+  <div class="nav-btn" onclick="showPage('tracker',this)">✅ Tracker</div>
+  <div class="nav-btn" onclick="showPage('questions',this)">🎯 Real Questions</div>
+  <div class="nav-btn" onclick="showPage('behavioral',this)">🎤 Behavioral</div>
+  <div class="nav-spacer"></div>
+  <div class="apply-chip">APPLY: APR 1</div>
+</nav>
+
+<!-- ═══════════════════════════ WEEKLY PLAN PAGE ═══════════════════════════ -->
+<div class="page active" id="page-plan">
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-title">Mar 1 – May 15, 2026<br><em>Google SDE-2 + FAANG</em></div>
+        <div class="hero-sub">DSA + LLD + HLD · 2HRS WEEKDAY / 7HRS WEEKEND · APPLY APRIL 1</div>
+      </div>
+      <div>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-n" style="color:var(--dsa)">106</div><div class="hstat-l">DSA GAPS</div></div>
+          <div class="hstat"><div class="hstat-n" style="color:var(--lld)">12</div><div class="hstat-l">LLD DESIGNS</div></div>
+          <div class="hstat"><div class="hstat-n" style="color:var(--hld)">11</div><div class="hstat-l">HLD SYSTEMS</div></div>
+          <div class="hstat"><div class="hstat-n" style="color:var(--accent)">11</div><div class="hstat-l">WEEKS</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-legend">
+      <div class="leg"><div class="leg-dot" style="background:var(--dsa)"></div>DSA</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--lld)"></div>LLD</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--hld)"></div>HLD</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--contest)"></div>LC Contest</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--mock)"></div>Mock</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--red)"></div>High Priority</div>
+    </div>
+  </div>
+
+  <div class="rhythm">
+    <div class="rday"><div class="rday-label">MON</div><span class="chip" style="background:var(--dsa-bg);color:var(--dsa)">DSA</span><br>4–5 problems<br>New topic</div>
+    <div class="rday"><div class="rday-label">TUE</div><span class="chip" style="background:var(--dsa-bg);color:var(--dsa)">DSA</span><br>4–5 problems<br>Same topic</div>
+    <div class="rday"><div class="rday-label">WED</div><span class="chip" style="background:var(--lld-bg);color:var(--lld)">LLD</span><br>1 full design<br>+ review</div>
+    <div class="rday"><div class="rday-label">THU</div><span class="chip" style="background:var(--dsa-bg);color:var(--dsa)">DSA</span><span class="chip" style="background:var(--hld-bg);color:var(--hld)">HLD</span><br>2-3 probs + concept</div>
+    <div class="rday"><div class="rday-label">FRI</div><span class="chip" style="background:var(--hld-bg);color:var(--hld)">HLD</span><br>1 full system<br>design</div>
+    <div class="rday"><div class="rday-label">SAT</div><span class="chip" style="background:var(--dsa-bg);color:var(--dsa)">DSA</span><span class="chip" style="background:var(--lld-bg);color:var(--lld)">LLD</span><span class="chip" style="background:var(--hld-bg);color:var(--hld)">HLD</span><br>Deep work 7hrs</div>
+    <div class="rday"><div class="rday-label">SUN</div><span class="chip" style="background:var(--contest-bg);color:var(--contest)">CONTEST</span><span class="chip" style="background:var(--mock-bg);color:var(--mock)">STAR</span><br>2hrs contest<br>2hrs upsolve<br>30min STAR</div>
+  </div>
+
+  <div class="wtabs-wrap">
+    <div class="wtabs">
+      <div class="wtab active" onclick="showWk(0)"><span class="wn">W1</span>Mar 1–7</div>
+      <div class="wtab" onclick="showWk(1)"><span class="wn">W2</span>Mar 8–14</div>
+      <div class="wtab" onclick="showWk(2)"><span class="wn">W3</span>Mar 15–21</div>
+      <div class="wtab" onclick="showWk(3)"><span class="wn">W4</span>Mar 22–28</div>
+      <div class="wtab milestone" onclick="showWk(4)"><span class="wn">W5</span>Mar 29–Apr 4 🎯</div>
+      <div class="wtab" onclick="showWk(5)"><span class="wn">W6</span>Apr 5–11</div>
+      <div class="wtab" onclick="showWk(6)"><span class="wn">W7</span>Apr 12–18</div>
+      <div class="wtab" onclick="showWk(7)"><span class="wn">W8</span>Apr 19–25</div>
+      <div class="wtab" onclick="showWk(8)"><span class="wn">W9</span>Apr 26–May 2</div>
+      <div class="wtab" onclick="showWk(9)"><span class="wn">W10</span>May 3–9</div>
+      <div class="wtab" onclick="showWk(10)"><span class="wn">W11</span>May 10+</div>
+    </div>
+  </div>
+
+  <div class="wpanels" id="wpanels"></div>
+</div>
+
+<!-- ═══════════════════════════ TRACKER PAGE ═══════════════════════════ -->
+<div class="page" id="page-tracker">
+  <div class="tracker-wrap">
+    <div class="tracker-header">
+      <div class="tracker-title">Progress Tracker</div>
+      <button class="reset-btn" onclick="resetAll()">Reset All</button>
+    </div>
+    <div class="overall-progress">
+      <div class="op-row">
+        <div class="op-item"><div class="op-n" style="color:var(--dsa)" id="dsa-prog">0/106</div><div class="op-l">DSA PROBLEMS</div><div class="progress-bar-wrap" style="margin-top:6px"><div class="progress-bar" style="background:var(--dsa);width:0%" id="dsa-bar"></div></div></div>
+        <div class="op-item"><div class="op-n" style="color:var(--lld)" id="lld-prog">0/12</div><div class="op-l">LLD DESIGNS</div><div class="progress-bar-wrap" style="margin-top:6px"><div class="progress-bar" style="background:var(--lld);width:0%" id="lld-bar"></div></div></div>
+        <div class="op-item"><div class="op-n" style="color:var(--hld)" id="hld-prog">0/11</div><div class="op-l">HLD SYSTEMS</div><div class="progress-bar-wrap" style="margin-top:6px"><div class="progress-bar" style="background:var(--hld);width:0%" id="hld-bar"></div></div></div>
+      </div>
+    </div>
+    <div id="tracker-content"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ REAL QUESTIONS PAGE ═══════════════════════════ -->
+<div class="page" id="page-questions">
+  <div class="iq-wrap">
+    <div class="iq-header">
+      <div class="iq-title">Real Interview Questions</div>
+      <div class="iq-sub">Sourced from LC Discuss, Medium, Glassdoor · 2023–2025 · All attributed to their source</div>
+    </div>
+    <div class="company-tabs">
+      <div class="ctab active" data-co="all" onclick="showCo('all',this)">All Companies</div>
+      <div class="ctab" data-co="google" onclick="showCo('google',this)">🔵 Google</div>
+      <div class="ctab" data-co="uber" onclick="showCo('uber',this)">🟠 Uber</div>
+      <div class="ctab" data-co="atlassian" onclick="showCo('atlassian',this)">🔷 Atlassian</div>
+      <div class="ctab" data-co="meta" onclick="showCo('meta',this)">🟣 Meta</div>
+      <div class="ctab" data-co="amazon" onclick="showCo('amazon',this)">🟡 Amazon</div>
+    </div>
+    <div id="questions-content"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ BEHAVIORAL PAGE ═══════════════════════════ -->
+<div class="page" id="page-behavioral">
+  <div class="beh-wrap">
+    <div class="beh-title">Behavioral & STAR Guide</div>
+    <div class="beh-sub">30min/day in Weeks 6–8 · Fix your articulation, not just your stories</div>
+
+    <div class="referral-card">
+      <div class="ref-icon">🤝</div>
+      <div>
+        <div class="ref-title">REFERRAL ACTION — Do This April 1, Same Day as Application</div>
+        <div class="ref-body">You have 3 college contacts at Google with phone numbers. <strong>Message all three the same day you apply.</strong> A lukewarm referral still moves you from the cold pool (often auto-screened) to a guaranteed recruiter review. You don't need to be close friends. A brief, direct message is enough. Template below.</div>
+        <div class="ref-template">"Hey [Name], hope you're doing well! I applied to Google SDE-2 today and was wondering if you'd be comfortable referring me. I've been at RingCentral for ~2 years working on [briefly: what you do], and I'm actively prepping. No pressure at all if it's not something you're comfortable with — just thought I'd ask since I respect your work. Thanks either way!"</div>
+      </div>
+    </div>
+
+    <div class="star-framework">
+      <div class="sf-title">The STAR Framework</div>
+      <div class="star-grid">
+        <div class="star-item"><div class="star-letter">S</div><div class="star-word">Situation</div><div class="star-desc">Set the scene. What was the context? Company stage, team size, constraints. Keep this to 2–3 sentences max.</div></div>
+        <div class="star-item"><div class="star-letter">T</div><div class="star-word">Task</div><div class="star-desc">What was YOUR specific responsibility? Not the team's — yours. What were you accountable for?</div></div>
+        <div class="star-item"><div class="star-letter">A</div><div class="star-word">Action</div><div class="star-desc">What did YOU do? Specific steps. This should be 60% of your answer. Use "I", not "we". Explain your reasoning.</div></div>
+        <div class="star-item"><div class="star-letter">R</div><div class="star-word">Result</div><div class="star-desc">What happened? Quantify if possible: "reduced latency by 40%", "shipped 2 weeks early". Always say what you learned.</div></div>
+      </div>
+    </div>
+
+    <div id="behavioral-content"></div>
+  </div>
+</div>
+
+<script>
+// ═══ DATA ═══
+const WEEKS = [
+  {
+    title:"Week 1 — Linked Lists & Trees Start",dates:"March 1–7",focus:"DSA: LL + Trees | LLD: Decorator+Builder | HLD: CAP+SQL+Cache",
+    dsa:{label:"DSA — Linked List + Trees",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Linked Lists",probs:[{n:"Reverse LL",lc:"#206",hi:1},{n:"Merge Two Sorted",lc:"#21",hi:1},{n:"Cycle II",lc:"#142",hi:1},{n:"Remove Nth",lc:"#19"},{n:"Reorder List",lc:"#143"},{n:"Reverse K-Group",lc:"#25",hi:1},{n:"Merge K Sorted",lc:"#23",hi:1},{n:"Copy Random Ptr",lc:"#138",hi:1},{n:"LRU Cache",lc:"#146",hi:1},{n:"Find Duplicate",lc:"#287"}]},
+      {label:"Thu–Sat · Trees Start",probs:[{n:"Right Side View",lc:"#199",hi:1},{n:"Vertical Order",lc:"#987",hi:1},{n:"Validate BST",lc:"#98",hi:1},{n:"Kth Smallest BST",lc:"#230",hi:1},{n:"BST Iterator",lc:"#173"}]},
+    ],note:"⚡ LRU Cache #146 is the most important — it's also a mini-HLD. Spend extra time."},
+    lld:{label:"LLD — New Patterns",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"Decorator Pattern: add behavior to objects without subclassing. Implement Coffee + Milk/Sugar decorators."},
+      {n:"Sat",t:"Builder Pattern: separate complex object construction. Implement QueryBuilder or HTTP Request builder."},
+      {n:"Note",t:"No full system yet — just get the two patterns sharp. You'll apply both in Week 2."}
+    ]},
+    hld:{label:"HLD — Core Concepts I",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"CAP Theorem: CP vs AP, why Cassandra (AP) vs HBase (CP), why CAP consistency ≠ ACID consistency"},
+      {n:"Fri",t:"SQL vs NoSQL: ACID vs BASE, when to use Document/KV/Wide-column/Graph DB, real examples"},
+      {n:"Sat",t:"Caching: cache-aside, write-through, write-back, LRU/LFU eviction, cache stampede problem"},
+      {n:"Resource",t:"ByteByteGo YouTube — 3 videos (15min each). Don't open Alex Xu yet."}
+    ]},
+    contest:"Contest (2hrs) + upsolve. Track: how fast do you finish Q1+Q2?",
+    mock:"No mocks yet. Week 3 is the earliest. Do 1 solo timed session Sat: 2 mediums, 45min, no hints."
+  },
+  {
+    title:"Week 2 — Hard Trees + Notification System",dates:"March 8–14",focus:"DSA: Hard Trees + Stack | LLD: Notification System | HLD: Load Balancing + CDN",
+    dsa:{label:"DSA — Trees Completion + Stack Gaps",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Hard Tree Problems",probs:[{n:"Max Path Sum",lc:"#124",hi:1},{n:"Serialize/Deserialize",lc:"#297",hi:1},{n:"Build Pre+Inorder",lc:"#105",hi:1},{n:"Count Good Nodes",lc:"#1448"},{n:"Diameter of BT",lc:"#543"}]},
+      {label:"Thu · Remaining Trees",probs:[{n:"Flatten BT→LL",lc:"#114"},{n:"Populate Next Ptrs",lc:"#116"},{n:"Path Sum II",lc:"#113"},{n:"House Robber III",lc:"#337",hi:1}]},
+      {label:"Sat · Stack Gaps",probs:[{n:"Valid Parentheses",lc:"#20",hi:1},{n:"Min Stack",lc:"#155",hi:1},{n:"Daily Temperatures",lc:"#739",hi:1},{n:"Decode String",lc:"#394",hi:1},{n:"Asteroid Collision",lc:"#735"},{n:"Remove K Digits",lc:"#402"}]},
+    ],note:"⚡ #124 is the hardest and most Google-asked. If you can solve it in 25min your tree fundamentals are solid."},
+    lld:{label:"LLD — Notification System",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"Design: NotificationService, Channel (Email/SMS/Push as Decorators), User, RetryPolicy"},
+      {n:"1",t:"Observer: events trigger notifications. Decorator: stack channels (Email+SMS+Push)."},
+      {n:"2",t:"Code fully. Claude review prompt: 'Check SOLID, edge cases, is Decorator vs Strategy more appropriate, concurrency, what would interviewer probe. Rate each 1-10 with fixes.'"},
+    ]},
+    hld:{label:"HLD — Load Balancing + CDN",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"Load Balancers: L4 vs L7, round-robin vs least-conn vs IP hash vs consistent hash, health checks"},
+      {n:"Fri",t:"CDN: Push vs Pull, cache invalidation, when to use. Consistent Hashing: why mod-N fails, virtual nodes"},
+      {n:"Note",t:"These come up in almost every HLD discussion. Must be explainable without notes by Week 4."}
+    ]},
+    contest:"Contest + upsolve. Add new patterns to your pattern sheet.",
+    mock:"1 solo timed mock Sat: 2 unseen mediums, 45min total. No hints. Talk out loud even alone."
+  },
+  {
+    title:"Week 3 — Backtracking + Vending Machine",dates:"March 15–21",focus:"DSA: Backtracking + Greedy | LLD: Vending Machine (State) | HLD: Sharding + Replication",
+    dsa:{label:"DSA — Backtracking + Greedy",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Backtracking Core",probs:[{n:"Subsets",lc:"#78",hi:1},{n:"Subsets II",lc:"#90",hi:1},{n:"Permutations",lc:"#46",hi:1},{n:"Combo Sum",lc:"#39",hi:1},{n:"Combo Sum II",lc:"#40",hi:1}]},
+      {label:"Thu · Backtracking Hard",probs:[{n:"Word Search",lc:"#79",hi:1},{n:"N-Queens",lc:"#51",hi:1},{n:"Sudoku Solver",lc:"#37"},{n:"Palindrome Partition",lc:"#131"},{n:"Letter Combos",lc:"#17"}]},
+      {label:"Sat · Greedy",probs:[{n:"Jump Game",lc:"#55",hi:1},{n:"Jump Game II",lc:"#45",hi:1},{n:"Gas Station",lc:"#134",hi:1},{n:"Partition Labels",lc:"#763",hi:1},{n:"Hand of Straights",lc:"#846"}]},
+    ],note:"⚡ Template: for each choice → make it → recurse → undo it. Early pruning is what separates good from great."},
+    lld:{label:"LLD — State Pattern + Vending Machine",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"State Pattern concept: object changes behavior when state changes — cleaner than if/else chains"},
+      {n:"1",t:"States: Idle → HasMoney → Dispensing → OutOfStock. Transitions: insertCoin(), selectItem(), dispense(), refund()"},
+      {n:"2",t:"Command Pattern (concept only): encapsulate request as object → enables undo/redo, queue, log"}
+    ]},
+    hld:{label:"HLD — Sharding + Replication",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"Sharding: range (hotspot problem) vs hash (no range queries) vs consistent hash (best of both)"},
+      {n:"Fri",t:"Replication: leader-follower, sync vs async, read replicas, replication lag problem, multi-leader"},
+      {n:"Note",t:"These are the backbone of every DB discussion. Should be second nature by Week 4."}
+    ]},
+    contest:"Contest + upsolve. 1 timed hard problem (40min, no hints) after upsolve.",
+    mock:"1 Pramp mock (DSA) — your first live mock. It will feel uncomfortable. Say your approach BEFORE coding."
+  },
+  {
+    title:"Week 4 — Graphs + Splitwise",dates:"March 22–28",focus:"DSA: Graph BFS/DFS + DSU | LLD: Splitwise | HLD: Message Queues + TinyURL Deep",
+    dsa:{label:"DSA — Graph BFS/DFS + DSU",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Grid BFS/DFS",probs:[{n:"Number of Islands",lc:"#200",hi:1},{n:"Max Area Island",lc:"#695",hi:1},{n:"Rotting Oranges",lc:"#994",hi:1},{n:"Pacific Atlantic",lc:"#417",hi:1},{n:"Word Ladder",lc:"#127",hi:1}]},
+      {label:"Thu · General Graph",probs:[{n:"Clone Graph",lc:"#133",hi:1},{n:"Walls and Gates",lc:"#286"},{n:"Surrounded Regions",lc:"#130"},{n:"Find Safe States",lc:"#802"},{n:"Is Bipartite",lc:"#785"}]},
+      {label:"Sat · Union-Find / DSU",probs:[{n:"Num of Provinces",lc:"#547",hi:1},{n:"Redundant Connection",lc:"#684",hi:1},{n:"Accounts Merge",lc:"#721",hi:1},{n:"Smallest String Swaps",lc:"#1202"}]},
+    ],note:"⚡ Implement DSU from scratch with path compression + union by rank. Sometimes asked directly at Google."},
+    lld:{label:"LLD — Splitwise (richest problem)",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"Entities: User, Group, Expense, Split (Equal/Exact/Percent), Balance"},
+      {n:"1",t:"Strategy: SplitStrategy → EqualSplit, ExactSplit, PercentSplit"},
+      {n:"2",t:"Balance graph: User→User→Amount. Simplify algo: reduce transactions using net balances (greedy)"},
+      {n:"3",t:"Code fully + Claude review. Budget 3.5hrs — this problem is that rich."}
+    ]},
+    hld:{label:"HLD — Message Queues + TinyURL Deep",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"Kafka: topics, partitions, consumer groups, offsets. At-least-once vs exactly-once vs at-most-once."},
+      {n:"Fri",t:"TinyURL full design: Base62, DB choice (Cassandra, why), Redis caching, sharding, analytics via Kafka"},
+      {n:"Note",t:"TinyURL done properly is your HLD framework template. Every other system uses the same skeleton."}
+    ]},
+    contest:"Contest + upsolve. Review DSU — can you write it cold in 5min?",
+    mock:"1 Pramp mock (DSA). 1 solo LLD mock Sat: 'Design ATM Machine' cold 45min, then Claude review."
+  },
+  {
+    title:"Week 5 — Dijkstra's + Elevator + APPLY",dates:"March 29 – April 4",focus:"APPLY TO GOOGLE: APRIL 1. DSA: Weighted Graphs + BS | LLD: Elevator | HLD: Rate Limiter + KV Store",milestone:true,
+    dsa:{label:"DSA — Weighted Graphs + Binary Search on Answer",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Dijkstra's",probs:[{n:"Network Delay",lc:"#743",hi:1},{n:"Cheapest Flights K",lc:"#787",hi:1},{n:"Swim Rising Water",lc:"#778"},{n:"Min Effort Path",lc:"#1631"}]},
+      {label:"Thu · Binary Search on Answer",probs:[{n:"Koko Bananas",lc:"#875",hi:1},{n:"Capacity to Ship",lc:"#1011",hi:1},{n:"Split Array Largest",lc:"#410",hi:1},{n:"K Closest Elements",lc:"#658",hi:1}]},
+      {label:"Sat · Intervals",probs:[{n:"Merge Intervals",lc:"#56",hi:1},{n:"Insert Interval",lc:"#57",hi:1},{n:"Non-overlapping",lc:"#435",hi:1},{n:"Meeting Rooms II",lc:"#253",hi:1}]},
+    ],note:"⚡ Binary search on answer (BS on the solution space + greedy verify) is a favourite Google pattern. #875 is the canonical example."},
+    lld:{label:"LLD — Elevator System (hardest)",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"Entities: ElevatorSystem, Elevator, Request (internal/external), Direction, State (IDLE/MOVING/DOOR_OPEN)"},
+      {n:"1",t:"Scheduling: SCAN algorithm — move one direction until no more requests, then reverse"},
+      {n:"2",t:"Multi-elevator: dispatcher assigns nearest idle elevator. Code + Claude review asking about race conditions."}
+    ]},
+    hld:{label:"HLD — Rate Limiter + Key-Value Store",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"Rate Limiter: token bucket, leaky bucket, sliding window log. Distributed: Redis + Lua for atomicity."},
+      {n:"Fri",t:"KV Store: consistent hash partitioning, N replicas, quorum (W+R>N), vector clocks, SSTable + LSM tree"}
+    ]},
+    milestone:"APRIL 1 — Apply to Google. Message all 3 college contacts same day. Referral template is on the Behavioral tab.",
+    contest:"Contest + upsolve. Write your pattern sheet summary — should have 20+ patterns by now.",
+    mock:"1 Pramp DSA mock. 1 solo LLD mock: 'Design Vending Machine' cold. Begin tracking time-to-pattern metric."
+  },
+  {
+    title:"Week 6 — Heaps + BookMyShow + News Feed",dates:"April 5–11",focus:"DSA: Heaps + Trie + 2D DP | LLD: BookMyShow (concurrency) | HLD: Twitter/News Feed",
+    dsa:{label:"DSA — Heaps + Trie + 2D DP",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Heap Core",probs:[{n:"Median from Stream",lc:"#295",hi:1},{n:"Top K Frequent",lc:"#347",hi:1},{n:"K Closest Points",lc:"#973",hi:1},{n:"Task Scheduler",lc:"#621",hi:1},{n:"Design Twitter",lc:"#355"}]},
+      {label:"Thu · Trie",probs:[{n:"Implement Trie",lc:"#208",hi:1},{n:"Add+Search Words",lc:"#211",hi:1},{n:"Word Search II",lc:"#212",hi:1},{n:"Max XOR",lc:"#421"},{n:"Search Suggestions",lc:"#1268"}]},
+      {label:"Sat · 2D DP Start",probs:[{n:"Unique Paths",lc:"#62",hi:1},{n:"Min Path Sum",lc:"#64",hi:1},{n:"Maximal Square",lc:"#221",hi:1},{n:"Interleaving String",lc:"#97",hi:1}]},
+    ],note:"⚡ #295 (Median from Stream) is a must. Two-heap pattern is elegant and appears in many variants — implement from scratch."},
+    lld:{label:"LLD — BookMyShow (concurrency)",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"Flow: browse shows → select seats → LOCK (5min TTL) → payment → confirm/release"},
+      {n:"1",t:"Seat states: AVAILABLE → LOCKED → BOOKED. Concurrency: 2 users select same seat simultaneously."},
+      {n:"2",t:"Solution: optimistic locking (version number) vs pessimistic (DB row lock). Code + review asking about races."},
+      {n:"Note",t:"You don't need to implement thread-safe code perfectly — identify the problem and discuss trade-offs. That's the bar."}
+    ]},
+    hld:{label:"HLD — Twitter/News Feed",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"Fan-out on write: precompute feeds, fast reads, write amplification for celebrities"},
+      {n:"Fri",t:"Fan-out on read: lazy, no amplification, slow reads at scale"},
+      {n:"Note",t:"Hybrid: write for normal users, read for celebrities (>1M followers). Celebrity problem = Google's favourite follow-up."}
+    ]},
+    contest:"Contest + upsolve. Try to identify Q3 pattern within first 5 minutes — track this time.",
+    mock:"1 Pramp DSA mock (focus on talking while coding). 1 HLD mock: 'Design Pastebin' solo."
+  },
+  {
+    title:"Week 7 — DP Completion + Chat System",dates:"April 12–18",focus:"DSA: Interval DP + Tree DP | LLD: Chess + Hotel | HLD: WhatsApp Chat",
+    dsa:{label:"DSA — DP Completion",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Interval DP + Strings",probs:[{n:"Burst Balloons",lc:"#312",hi:1},{n:"Min Cost Cut Stick",lc:"#1547"},{n:"Median Two Arrays",lc:"#4"},{n:"Distinct Subsequences",lc:"#115"},{n:"Wildcard Matching",lc:"#44"}]},
+      {label:"Thu · Tree DP + Bitmask",probs:[{n:"BT Cameras",lc:"#968"},{n:"Partition K Sums",lc:"#698"},{n:"Min Interval Query",lc:"#1851",hi:1}]},
+      {label:"Sat · Google Tagged",probs:[{n:"Magnetic Force Balls",lc:"#1552"},{n:"Asteroid Collision",lc:"#735"},{n:"Basic Calc II",lc:"#227"},{n:"Regular Expr Match",lc:"#10"}]},
+    ],note:"⚡ Burst Balloons #312 is the canonical interval DP problem. Budget 40min before hints. If you can solve it cold, interval DP is done."},
+    lld:{label:"LLD — Chess + Hotel Management",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"Chess: Board, Cell, Piece (abstract), King/Queen/Rook/Bishop/Knight/Pawn. Each has getValidMoves(Board)."},
+      {n:"Sat",t:"Hotel Management: Room (types via Factory), Booking lifecycle (reserve→checkin→checkout→billing), Room search."}
+    ]},
+    hld:{label:"HLD — WhatsApp Chat (Alex Xu Ch 12)",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"WebSocket: why HTTP polling fails for real-time. Chat service: client ↔ chat server ↔ message store."},
+      {n:"Fri",t:"Message ordering: Snowflake ID. Online presence: heartbeat 5s + Redis. Group chat: fan-out, cap group size."},
+      {n:"Note",t:"Probe to prep: 'How do you guarantee message delivery when user is offline?' — have a crisp answer."}
+    ]},
+    contest:"Contest + upsolve. How many Q3s are you solving in contest time now?",
+    mock:"1 Pramp DSA mock. 1 LLD cold mock: 'Design Library Management' 45min. Book 1 interviewing.io session for W8."
+  },
+  {
+    title:"Week 8 — Google Hard Problems + YouTube",dates:"April 19–25",focus:"DSA: Google Hard + Tagged | LLD: Uber Core | HLD: YouTube + Google Drive",
+    dsa:{label:"DSA — Famous Google Problems",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Classic Google Hard",probs:[{n:"Guess the Word",lc:"#843",hi:1},{n:"Race Car",lc:"#818",hi:1},{n:"24 Game",lc:"#679",hi:1},{n:"Text Justification",lc:"#68",hi:1}]},
+      {label:"Thu · Google Tagged",probs:[{n:"Stickers to Spell",lc:"#691",hi:1},{n:"Min Window Substr",lc:"#76",hi:1},{n:"Trapping Rain Water",lc:"#42",hi:1},{n:"Employee Free Time",lc:"#759"}]},
+      {label:"Sat · Mixed Hard",probs:[{n:"Word Break II",lc:"#140"},{n:"Course Schedule III",lc:"#630"},{n:"Strange Printer",lc:"#664"},{n:"Max Points on Line",lc:"#149",hi:1}]},
+    ],note:"Budget 35min each on #843, #818, #679 before hints. Pattern exposure is the goal, not cold solving."},
+    lld:{label:"LLD — Ride Sharing (Uber Core)",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"States on Trip: REQUESTED→MATCHED→EN_ROUTE→ARRIVED→COMPLETED (State machine)"},
+      {n:"1",t:"Driver matching: Strategy (nearest, highest rated, surge area). Observer: notify rider on state change."},
+      {n:"2",t:"Pricing: Strategy (standard, surge, pool). This design uses every pattern you've learned."}
+    ]},
+    hld:{label:"HLD — YouTube + Google Drive",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"YouTube: raw video → transcoding workers (parallel DAG) → CDN. Adaptive bitrate (HLS/DASH). CDN pre-seeding."},
+      {n:"Fri",t:"Google Drive: chunking (4MB), dedup (hash chunks), delta sync (only changed chunks), conflict resolution."}
+    ]},
+    contest:"Contest + upsolve. Self-check: finishing Q1+Q2 in <25min consistently?",
+    mock:"1 interviewing.io DSA mock (paid, ex-FAANG). 1 HLD mock: 'Design Dropbox' 45min. Debrief both in writing."
+  },
+  {
+    title:"Week 9 — Autocomplete + LLD Cold Mocks",dates:"April 26 – May 2",focus:"DSA: Consolidation + Hard | LLD: Cold Mock Mode | HLD: Autocomplete + Web Crawler",
+    dsa:{label:"DSA — Consolidation + Hard",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Weak Area Revisit",probs:[]},
+      {label:"Thu · More Google Hard",probs:[{n:"Smallest Range K Lists",lc:"#632",hi:1},{n:"MK Average",lc:"#2062",hi:1},{n:"Regular Expr Match",lc:"#10"},{n:"Alien Dictionary",lc:"#269",hi:1}]},
+    ],note:"Mon–Tue: Go back to your pattern sheet. Any pattern marked shaky → do 3 more problems. Sat: Speed drill — 8 solved mediums, 20min timer each. Target 8/10 clean."},
+    lld:{label:"LLD — Cold Mock Mode",hrs:"~4hrs",steps:[
+      {n:"Wed",t:"Cold: Snake and Ladder (45min). After: ask Claude 'how to extend for multiplayer online?'"},
+      {n:"Sat",t:"Cold: ATM Machine (45min). Focus on State + Command for transactions."},
+      {n:"Bar",t:"By now: identify patterns and class hierarchies in first 5 minutes of any design problem."}
+    ]},
+    hld:{label:"HLD — Autocomplete + Web Crawler",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"Autocomplete: Trie + top-K at each node, frequency via Kafka→Spark batch, shard Trie by first char"},
+      {n:"Fri",t:"Web Crawler: BFS URL frontier, bloom filter dedup, politeness (robots.txt, rate limits per domain)"}
+    ]},
+    contest:"Contest + upsolve. Check your LC rating — should be approaching 1850+ by now.",
+    mock:"2 Pramp DSA mocks. 1 HLD mock: 'Design Twitter Search'. Sat: write 6 STAR stories (30min) — Behavioral tab has prompts."
+  },
+  {
+    title:"Week 10 — Full Simulation",dates:"May 3–9",focus:"No new topics. Pure simulation and polish.",
+    dsa:{label:"DSA — Speed + Polish",hrs:"~10hrs",sections:[
+      {label:"Mon–Tue · Speed Drilling",probs:[]},
+      {label:"Thu · Hard Polish",probs:[{n:"Max Sliding Window",lc:"#239",hi:1},{n:"Alien Dictionary",lc:"#269",hi:1},{n:"Min Window Substr",lc:"#76",hi:1},{n:"Smallest Range",lc:"#632",hi:1}]},
+    ],note:"Mon–Tue: 10 solved mediums, 18min timer each. Target: 8/10 clean, no bugs. Sat: read entire pattern sheet — 30–40 patterns. This is your pre-interview cheat code."},
+    lld:{label:"LLD — Verbal Final Review",hrs:"~3hrs",steps:[
+      {n:"Wed",t:"For each of 10 designs: 5min verbal walkthrough. Can you name patterns, key classes, one concurrency note?"},
+      {n:"Note",t:"Don't recode anything. Verbal fluency is the last mile of LLD prep."}
+    ]},
+    hld:{label:"HLD — Trade-off Drilling",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"For each system, answer cold: 'Why not just PostgreSQL?' / 'SPOF?' / '10x spike tomorrow?' / '10x budget?'"},
+      {n:"Note",t:"Crisp trade-off answers are what separate 'hire' from 'strong hire' in HLD rounds."}
+    ]},
+    contest:"Final contest. Reflect: how far from March 1? That progress is real.",
+    mock:"SATURDAY FULL ONSITE SIM: 9am DSA Mock, 10:15am DSA Mock, 11:30am HLD Mock, 12:15pm Behavioral Mock. Debrief all."
+  },
+  {
+    title:"Week 11+ — Interview Period",dates:"May 10 onwards",focus:"Light maintenance only. Trust the work.",
+    dsa:{label:"DSA — Maintenance",hrs:"30-45min/day",sections:[],note:"1–2 solved mediums/day for speed. Read pattern sheet every morning. NO new hard problems — risk/reward is bad this late."},
+    lld:{label:"LLD — Verbal Only",hrs:"",steps:[{n:"Pre",t:"Day before interview: verbally walk 2 LLD designs you're most confident in. Requirements → entities → patterns → code."}]},
+    hld:{label:"HLD — Quick Review",hrs:"",steps:[{n:"Pre",t:"Day before: re-read TinyURL and News Feed notes. Review the framework: clarify→estimate→design→deep dive→trade-offs."},{n:"→",t:"Sleep 8 hours. Seriously."}]},
+    contest:"Keep attending contests to stay sharp. Don't grind.",
+    mock:"Light mocks only if you feel rusty. Don't overdo it."
+  }
+];
+
+const TRACKER_DATA = {
+  "Linked List":[
+    {n:"Reverse LL",lc:"#206"},{n:"Merge Two Sorted Lists",lc:"#21"},{n:"Linked List Cycle II",lc:"#142"},
+    {n:"Remove Nth From End",lc:"#19"},{n:"Reorder List",lc:"#143"},{n:"Reverse Nodes in K-Group",lc:"#25"},
+    {n:"Merge K Sorted Lists",lc:"#23"},{n:"Copy List Random Ptr",lc:"#138"},{n:"LRU Cache",lc:"#146"},
+    {n:"Find the Duplicate Number",lc:"#287"}
+  ],
+  "Binary Trees":[
+    {n:"Binary Tree Right Side View",lc:"#199"},{n:"Vertical Order Traversal",lc:"#987"},{n:"Validate BST",lc:"#98"},
+    {n:"Kth Smallest in BST",lc:"#230"},{n:"BST Iterator",lc:"#173"},{n:"Binary Tree Max Path Sum",lc:"#124"},
+    {n:"Serialize and Deserialize BT",lc:"#297"},{n:"Build Tree Pre+Inorder",lc:"#105"},
+    {n:"Count Good Nodes",lc:"#1448"},{n:"Diameter of Binary Tree",lc:"#543"},
+    {n:"Flatten BT to Linked List",lc:"#114"},{n:"Populating Next Right Ptrs",lc:"#116"},
+    {n:"Path Sum II",lc:"#113"}
+  ],
+  "Backtracking":[
+    {n:"Subsets",lc:"#78"},{n:"Subsets II",lc:"#90"},{n:"Permutations",lc:"#46"},{n:"Combination Sum",lc:"#39"},
+    {n:"Combination Sum II",lc:"#40"},{n:"Word Search",lc:"#79"},{n:"N-Queens",lc:"#51"},
+    {n:"Sudoku Solver",lc:"#37"},{n:"Palindrome Partitioning",lc:"#131"},{n:"Letter Combinations",lc:"#17"}
+  ],
+  "Graphs":[
+    {n:"Number of Islands",lc:"#200"},{n:"Max Area of Island",lc:"#695"},{n:"Rotting Oranges",lc:"#994"},
+    {n:"Pacific Atlantic Water Flow",lc:"#417"},{n:"Word Ladder",lc:"#127"},{n:"Clone Graph",lc:"#133"},
+    {n:"Walls and Gates",lc:"#286"},{n:"Surrounded Regions",lc:"#130"},{n:"Find Safe States",lc:"#802"},
+    {n:"Is Bipartite",lc:"#785"},{n:"Number of Provinces (DSU)",lc:"#547"},{n:"Redundant Connection",lc:"#684"},
+    {n:"Accounts Merge",lc:"#721"},{n:"Smallest String Swaps",lc:"#1202"}
+  ],
+  "Weighted Graphs":[
+    {n:"Network Delay Time",lc:"#743"},{n:"Cheapest Flights K Stops",lc:"#787"},
+    {n:"Swim in Rising Water",lc:"#778"},{n:"Path With Minimum Effort",lc:"#1631"}
+  ],
+  "Heap / Priority Queue":[
+    {n:"Find Median from Stream",lc:"#295"},{n:"Top K Frequent Elements",lc:"#347"},
+    {n:"K Closest Points to Origin",lc:"#973"},{n:"Task Scheduler",lc:"#621"},{n:"Design Twitter",lc:"#355"}
+  ],
+  "Trie":[
+    {n:"Implement Trie",lc:"#208"},{n:"Design Add and Search Words",lc:"#211"},{n:"Word Search II",lc:"#212"},
+    {n:"Maximum XOR of Two Numbers",lc:"#421"},{n:"Search Suggestions System",lc:"#1268"}
+  ],
+  "Intervals":[
+    {n:"Merge Intervals",lc:"#56"},{n:"Insert Interval",lc:"#57"},{n:"Non-overlapping Intervals",lc:"#435"},
+    {n:"Meeting Rooms II",lc:"#253"},{n:"Min Interval per Query",lc:"#1851"}
+  ],
+  "Binary Search":[
+    {n:"Koko Eating Bananas",lc:"#875"},{n:"Capacity to Ship Packages",lc:"#1011"},
+    {n:"Find K Closest Elements",lc:"#658"},{n:"Split Array Largest Sum",lc:"#410"},
+    {n:"Median of Two Sorted Arrays",lc:"#4"}
+  ],
+  "2D DP":[
+    {n:"Unique Paths",lc:"#62"},{n:"Minimum Path Sum",lc:"#64"},{n:"Maximal Square",lc:"#221"},
+    {n:"Interleaving String",lc:"#97"},{n:"Distinct Subsequences",lc:"#115"},{n:"Wildcard Matching",lc:"#44"}
+  ],
+  "Interval + Tree DP":[
+    {n:"Burst Balloons",lc:"#312"},{n:"Min Cost Cut Stick",lc:"#1547"},{n:"House Robber III",lc:"#337"},
+    {n:"Binary Tree Cameras",lc:"#968"},{n:"Partition K Equal Sums",lc:"#698"}
+  ],
+  "Stack Gaps":[
+    {n:"Valid Parentheses",lc:"#20"},{n:"Min Stack",lc:"#155"},{n:"Daily Temperatures",lc:"#739"},
+    {n:"Decode String",lc:"#394"},{n:"Asteroid Collision",lc:"#735"},{n:"Remove K Digits",lc:"#402"}
+  ],
+  "Greedy":[
+    {n:"Jump Game",lc:"#55"},{n:"Jump Game II",lc:"#45"},{n:"Gas Station",lc:"#134"},{n:"Partition Labels",lc:"#763"}
+  ]
+};
+
+const LLD_TRACKER = [
+  "Notification System","Vending Machine","Splitwise","Elevator System","BookMyShow",
+  "Chess","Hotel Management","Ride Sharing (Uber Core)","Snake and Ladder","ATM Machine",
+  "Parking Lot ✅","Tic Tac Toe ✅"
+];
+
+const HLD_TRACKER = [
+  "TinyURL (full design)","Rate Limiter","Key-Value Store","Twitter/News Feed","WhatsApp Chat System",
+  "YouTube","Google Drive","Search Autocomplete","Web Crawler","Notification System HLD","Unique ID Generator"
+];
+
+const REAL_QUESTIONS = [
+  {company:"google",type:"dsa",title:"Cloud Storage Snapshot Deletion",question:"You're managing a cloud storage system with disks and snapshots. A snapshot can only be deleted once all disks created from it (and their children) are safely deleted. Given a list of disk and snapshot objects, return the sequence of disk deletions that safely removes all disks.",pattern:"Topological Sort (dependency graph)",difficulty:"hard",round:"Onsite Round 1",source:"Medium — Google India Interview Experience 2025",sourceType:"medium",tags:["Graph","Topological Sort","DFS"]},
+  {company:"google",type:"dsa",title:"IP Pattern Matching (Most Precise Match)",question:"Given a list of IP patterns (e.g. *, 192.168.*, 192.168.2.*, 192.168.2.1) and a list of query IPs, return the most precisely matching pattern for each query.",pattern:"Trie",difficulty:"medium",round:"Phone Screen (Jan 2025, L4)",source:"LC Discuss — Google SDE-2 L4 Interview Experience Jan 2025",sourceType:"lc-discuss",tags:["Trie","String"]},
+  {company:"google",type:"dsa",title:"Zero Array Transformation",question:"Given an integer array and a list of range operations, find the minimum number of operations to make the entire array zero. Follow-up: find the first operation index where the array becomes zero.",pattern:"Line Sweep / Segment Tree",difficulty:"hard",round:"Onsite Round 2",source:"LC Discuss — Google SDE-2 L4 Interview Experience Jan 2025",sourceType:"lc-discuss",tags:["Line Sweep","Segment Tree","Prefix Sum"]},
+  {company:"google",type:"dsa",title:"MK Average",question:"Design a data structure that maintains a stream of integers and computes the MK Average: remove the smallest M and largest M elements from the last K, then return the mean of the rest.",pattern:"Heap / TreeMap / Sorted Structure",difficulty:"hard",round:"Onsite Round 3",source:"LC Discuss — Google SDE-2 L4 Interview Experience Jan 2025",sourceType:"lc-discuss",tags:["Heap","TreeMap","Sliding Window"]},
+  {company:"google",type:"dsa",title:"2D Box Nesting (Maximum Nesting Depth)",question:"Given a collection of 2D boxes of different sizes, find the maximum number that can be nested inside one another. A box fits inside another if both dimensions are strictly smaller.",pattern:"DP on DAG / LIS variant",difficulty:"hard",round:"Onsite Round 2",source:"Medium — Google India Interview Experience (published article you shared)",sourceType:"medium",tags:["DP","DAG","Binary Search"]},
+  {company:"google",type:"dsa",title:"Garland Cut Problem (Diamonds + Rubies)",question:"An array contains d diamonds and r rubies (both even). You can make up to 2 cuts to divide it into two parts such that both parts contain the same number of diamonds and rubies.",pattern:"Sliding Window (fixed length n/2)",difficulty:"medium",round:"Onsite Round (India L3, 2025)",source:"LC Discuss — Google L3 SDE-II India 2025 April-May",sourceType:"lc-discuss",tags:["Sliding Window","Prefix Sum"]},
+  {company:"google",type:"dsa",title:"Wooden Table Cake Placement (Line Sweep)",question:"A square wooden table has cakes of various square sizes placed randomly. Find if any two cakes overlap, and after each new cake placement query whether the table is still valid.",pattern:"Line Sweep / Interval Tree",difficulty:"hard",round:"Onsite Round 1 (L4, Jan 2025)",source:"LC Discuss — Google SDE-2 L4 Interview Experience Jan 2025",sourceType:"lc-discuss",tags:["Line Sweep","Segment Tree","Geometry"]},
+  {company:"google",type:"hld",title:"Design a Distributed Messenger System",question:"Design a messenger system supporting 1-1 and group chats. Handle message delivery guarantees, offline users, message ordering, and scale to 500M daily active users.",pattern:"WebSocket, Message Queue, Consistent Hashing",difficulty:"hard",round:"System Design",source:"LeetcodeWizard — Google SDE Interview Guide 2024/2025",sourceType:"guide",tags:["HLD","Distributed Systems","WebSocket"]},
+
+  {company:"uber",type:"dsa",title:"Longest Subarray Absolute Diff ≤ K",question:"Given an integer array and a number K, find the length of the longest subarray in which the absolute difference between any two elements is ≤ K.",pattern:"Sliding Window + Two Monotonic Deques (min deque + max deque)",difficulty:"hard",round:"Onsite DSA Round",source:"Medium — Uber L4 SDE-2 Backend Interview December 2024",sourceType:"medium",tags:["Sliding Window","Monotonic Deque"]},
+  {company:"uber",type:"dsa",title:"Minimum Appends for Subsequence",question:"Given two strings s and t, find the minimum number of times s must be appended to itself so that t becomes a subsequence of the result.",pattern:"Greedy + Two Pointer",difficulty:"medium",round:"Phone Screen",source:"LC Discuss — Uber SE-2 Bangalore Interview Experience",sourceType:"lc-discuss",tags:["Greedy","Two Pointer","String"]},
+  {company:"uber",type:"dsa",title:"Cheapest Flights Within K Stops",question:"Find the cheapest flight path from source to destination with at most K stops.",pattern:"Bellman-Ford / Modified Dijkstra",difficulty:"medium",round:"Onsite DSA Round",source:"LC Discuss — Uber SE-2 Bangalore (direct LC link to #787 shared)",sourceType:"lc-discuss",tags:["Dijkstra","Bellman-Ford","Graph"],lcNum:"#787"},
+  {company:"uber",type:"dsa",title:"Train Platform Scheduler (Meeting Rooms variant)",question:"Given train arrival and departure times, find the minimum number of platforms needed. Follow-up: if no platform is available, delay the train. Implemented as machine coding.",pattern:"Heap + Greedy (Meeting Rooms II variant)",difficulty:"medium",round:"Machine Coding / LLD Round",source:"Medium — Uber L4 SDE-2 Backend December 2024",sourceType:"medium",tags:["Heap","Greedy","Intervals"]},
+  {company:"uber",type:"dsa",title:"Largest Sub-grid with 1s on All Borders",question:"Given an N×N grid of 0s and 1s, find the largest size of a sub-grid where all cells on its border are 1.",pattern:"2D Prefix Sum / DP",difficulty:"hard",round:"Initial Screening DSA",source:"Medium — Uber L4 SDE-2 Backend December 2024",sourceType:"medium",tags:["2D DP","Prefix Sum","Grid"]},
+  {company:"uber",type:"dsa",title:"Maximum Points from Cards",question:"Given a row of cards, you can take cards from the left or right end. Find the maximum points you can obtain by taking exactly k cards.",pattern:"Sliding Window (complement)",difficulty:"medium",round:"Onsite DSA Round",source:"LC Discuss — Uber SE-2 Bangalore (direct LC link #1423 shared)",sourceType:"lc-discuss",tags:["Sliding Window","Array"],lcNum:"#1423"},
+  {company:"uber",type:"lld",title:"Design a Splitwise-Like Application",question:"Asked to quickly describe entities, parameters, and key service functions for a bill-splitting app. Interviewer hinted at Strategy Pattern and showed a brief code example.",pattern:"Strategy Pattern",difficulty:"medium",round:"DSA Round (follow-up)",source:"Medium — Uber SE-I Off-Campus 2024",sourceType:"medium",tags:["LLD","Strategy","OOP"]},
+  {company:"uber",type:"hld",title:"E-commerce Event Processor (HLD)",question:"Design a backend system to process events at scale: 'Product added to Cart', 'Product viewed', 'Product purchased'. Where to store data? Consistency vs availability trade-off?",pattern:"Kafka + MongoDB + Redis Leaderboard",difficulty:"medium",round:"HLD Round",source:"LC Discuss — Uber SE-2 Bangalore Interview Experience",sourceType:"lc-discuss",tags:["HLD","Kafka","MongoDB","Redis"]},
+
+  {company:"atlassian",type:"lld",title:"Design an API Rate Limiter (Runnable Code)",question:"Implement a sliding window rate limiter. Code must be runnable in an IDE and pass test cases. Follow-up: unused quota from a time window rolls over to the next window.",pattern:"Sliding Window Counter + ConcurrentHashMap + synchronized",difficulty:"medium",round:"LLD / Machine Coding Round 1",source:"LC Discuss — Atlassian SDE-2 Remote (multiple experiences 2021–2024)",sourceType:"lc-discuss",tags:["LLD","Rate Limiter","Concurrency"]},
+  {company:"atlassian",type:"dsa",title:"Top-N Collections by File Size (Nested)",question:"Given [FileName, FileSize, Collection], find top-N collections by total size. Follow-up: collections can be nested — find top N recursively.",pattern:"HashMap + Heap / DFS on tree of collections",difficulty:"medium",round:"DSA / Code Design Round 2",source:"LC Discuss — Atlassian SDE-2 Remote 2021 (Offer)",sourceType:"lc-discuss",tags:["HashMap","Heap","DFS","Design"]},
+  {company:"atlassian",type:"dsa",title:"Rank Teams by Votes",question:"Rank teams based on votes where each voter ranks all teams. Handle tie-breaking by position of ranking.",pattern:"Custom Comparator + Sorting",difficulty:"medium",round:"DSA Round",source:"LC Discuss — Atlassian P4/SDE-2 June 2022 (Offer)",sourceType:"lc-discuss",tags:["Sorting","Custom Comparator"],lcNum:"#1366"},
+  {company:"atlassian",type:"hld",title:"Design a Common Tagging System for Jira + Confluence + BitBucket",question:"Design a shared tagging system across all Atlassian products. Support creating tags, tagging entities across products, and finding top-K popular tags.",pattern:"Tag Service + Inverted Index + Heap for Top-K",difficulty:"hard",round:"System Design Round",source:"LC Discuss — Atlassian P4/SDE-2 June 2022 (Offer)",sourceType:"lc-discuss",tags:["HLD","Inverted Index","Top-K"]},
+  {company:"atlassian",type:"hld",title:"Design a Color Palette Sharing System",question:"Design a system where users can save color lists, share them via email, and control access. Scale and actual functionality were both evaluated.",pattern:"REST API + ACL + Email Service + DB Schema",difficulty:"medium",round:"System Design Round",source:"LC Discuss — Atlassian SDE-2 Remote (Accepted)",sourceType:"lc-discuss",tags:["HLD","Auth","ACL","REST"]},
+  {company:"atlassian",type:"lld",title:"Design Jira Ticket with Dependencies",question:"Model a Jira-like ticket system where tickets can block each other. Implement finding all blocked tickets, detecting circular dependencies, and ordering work.",pattern:"Graph / Topological Sort + OOP",difficulty:"medium",round:"LLD Round",source:"LC Discuss — Atlassian Senior Software Engineer Experience",sourceType:"lc-discuss",tags:["LLD","Graph","Topological Sort"]},
+  {company:"atlassian",type:"dsa",title:"Sliding Window Rate Limiter with Multi-threading",question:"Implement a sliding window rate limiter and then discuss: why ConcurrentHashMap instead of HashMap? How would you use synchronized? What's the difference?",pattern:"Sliding Window + Thread Safety",difficulty:"medium",round:"LLD / Machine Coding with Concurrency",source:"LC Discuss — Atlassian Senior Software Engineer (2024)",sourceType:"lc-discuss",tags:["Concurrency","Sliding Window","Java"]},
+
+  {company:"meta",type:"dsa",title:"Friend Recommendation (Mutual Friends)",question:"Given a social graph, recommend friends-of-friends sorted by number of mutual connections, excluding people already connected.",pattern:"BFS + HashMap for mutual count",difficulty:"medium",round:"Coding Round",source:"Meta interview prep guides (Glassdoor + LC Discuss compilation)",sourceType:"glassdoor",tags:["Graph","BFS","HashMap"]},
+  {company:"meta",type:"dsa",title:"Design a Data Structure for LRU + LFU",question:"Implement a cache that combines LRU eviction with frequency counting. Design with O(1) get and put.",pattern:"Doubly Linked List + HashMap + Frequency Map",difficulty:"hard",round:"Coding Round",source:"LC Discuss — Meta SDE2 Interview Experiences 2024",sourceType:"lc-discuss",tags:["Design","Linked List","HashMap"]},
+  {company:"meta",type:"dsa",title:"Longest Substring with At Most K Distinct Chars",question:"Find the length of the longest substring containing at most k distinct characters.",pattern:"Sliding Window + HashMap",difficulty:"medium",round:"Phone Screen",source:"Glassdoor — Meta SDE2 interview questions 2024",sourceType:"glassdoor",tags:["Sliding Window","HashMap"],lcNum:"#340"},
+  {company:"meta",type:"dsa",title:"Remove Invalid Parentheses",question:"Remove the minimum number of invalid parentheses to make the string valid. Return all unique results.",pattern:"BFS / DFS Backtracking",difficulty:"hard",round:"Onsite Coding",source:"LC Discuss — Meta L4/L5 interview experiences",sourceType:"lc-discuss",tags:["BFS","Backtracking"],lcNum:"#301"},
+  {company:"meta",type:"hld",title:"Design Instagram / Photo Feed",question:"Design a photo sharing platform supporting upload, feed generation, likes/comments at 1B DAU scale.",pattern:"Fan-out on write, CDN, Blob Store, Cassandra",difficulty:"hard",round:"System Design",source:"Glassdoor + LC Discuss — Meta System Design rounds 2024",sourceType:"glassdoor",tags:["HLD","CDN","Blob Storage","Fan-out"]},
+  {company:"meta",type:"hld",title:"Design a Distributed Task Scheduler",question:"Design a system that schedules and runs millions of tasks with dependencies, retry logic, and exactly-once execution guarantees.",pattern:"DAG, Message Queue, Idempotency Keys",difficulty:"hard",round:"System Design",source:"LC Discuss — Meta E5 System Design prep",sourceType:"lc-discuss",tags:["HLD","Distributed Systems","DAG","Queue"]},
+  {company:"meta",type:"lld",title:"Design a Notification System with Priority",question:"Design a notification service that supports Email, SMS, and Push notifications with priority queues (critical, high, low) and retry logic.",pattern:"Strategy + Observer + Priority Queue",difficulty:"medium",round:"LLD Round",source:"Meta interview prep community (Glassdoor)",sourceType:"glassdoor",tags:["LLD","Strategy","Observer","Queue"]},
+
+  {company:"amazon",type:"dsa",title:"Shopping Cart Checkout Optimization",question:"Given a list of items with prices and discount rules (e.g. buy 2 get 1 free, bulk discounts), find the minimum cost to purchase a given list of items.",pattern:"DP / Greedy depending on constraints",difficulty:"hard",round:"Coding Round",source:"Glassdoor — Amazon SDE-2 interview questions 2024",sourceType:"glassdoor",tags:["DP","Greedy","Optimization"]},
+  {company:"amazon",type:"dsa",title:"Maximum Profit from Product Recommendations",question:"Given user purchase history as a sequence and product pairs that are often bought together, find the maximum revenue from a recommendation system given a budget constraint.",pattern:"Graph + DP / Greedy",difficulty:"hard",round:"Online Assessment",source:"Glassdoor — Amazon SDE-2 OA 2024",sourceType:"glassdoor",tags:["Graph","DP","OA"]},
+  {company:"amazon",type:"dsa",title:"Minimum Days to Deliver All Packages",question:"Given warehouse locations and package destinations, find the minimum number of days needed to deliver all packages given truck capacity constraints.",pattern:"Binary Search on Answer + Greedy",difficulty:"hard",round:"Coding Round",source:"LC Discuss — Amazon SDE-2 India 2024",sourceType:"lc-discuss",tags:["Binary Search","Greedy"]},
+  {company:"amazon",type:"hld",title:"Design Amazon's Product Search",question:"Design the search backend for Amazon.com — support full-text search, filtering by category/price/rating, and ranking by relevance + sales.",pattern:"Inverted Index + Elasticsearch + Relevance Scoring",difficulty:"hard",round:"System Design",source:"Glassdoor — Amazon SDE-2 System Design round",sourceType:"glassdoor",tags:["HLD","Search","Elasticsearch","Ranking"]},
+  {company:"amazon",type:"hld",title:"Design a Flash Sale System",question:"Design a system that handles a flash sale where a limited-quantity item goes on sale at a specific time to millions of simultaneous users. Ensure fairness and prevent overselling.",pattern:"Redis atomic counter + Queue + Rate limiting",difficulty:"hard",round:"System Design",source:"LC Discuss — Amazon Flash Sale system design frequently asked",sourceType:"lc-discuss",tags:["HLD","Redis","Distributed Locking","Rate Limiting"]},
+  {company:"amazon",type:"lld",title:"Design Amazon Locker System",question:"Design the Amazon Locker system: customers can pick up packages from a locker near them. Handle locker assignment, package expiry, SMS notifications, and locker size matching.",pattern:"Strategy (size matching) + State machine + Observer (notifications)",difficulty:"medium",round:"LLD Round",source:"Glassdoor — Amazon SDE-2 LLD rounds",sourceType:"glassdoor",tags:["LLD","State Machine","Strategy","Observer"]},
+  {company:"amazon",type:"dsa",title:"Warehouse Robot Path Planning",question:"A grid warehouse has obstacles. A robot needs to visit a list of product locations in the minimum total distance. Find the optimal order and path.",pattern:"BFS shortest path + TSP approximation",difficulty:"hard",round:"Coding Round",source:"Glassdoor — Amazon SDE-2 Robotics/Warehouse team",sourceType:"glassdoor",tags:["BFS","Graph","Greedy"]}
+];
+
+const BEHAVIORAL_DATA = [
+  {
+    week:"Weeks 6–7",title:"Core Google Stories (Googleyness)",
+    stories:[
+      {title:"Handled Ambiguity",prompt:"Tell me about a time you had to make a decision with incomplete information.",s:"Context at RingCentral, what was unclear",t:"Your role in driving a decision",a:"How you gathered what you could, what trade-off you chose",r:"Outcome + what you'd do differently"},
+      {title:"Disagreed and Committed",prompt:"Describe a time you disagreed with a technical decision but still moved forward.",s:"What the decision was and why you disagreed",t:"Your responsibility to the team",a:"How you raised concerns, how you eventually committed",r:"What happened, what you learned about collaboration"},
+      {title:"Ownership of a Failure",prompt:"Tell me about a bug or incident you caused. How did you handle it?",s:"The system, the failure, the impact",t:"Your role (you wrote the bug or missed the test)",a:"How you detected it, communicated it, fixed it, prevented recurrence",r:"Concrete outcome — no finger-pointing"}
+    ],
+    tips:[
+      "Google cares most about: intellectual humility, collaborative problem-solving, comfort with ambiguity",
+      "Never say 'we did X' — always say 'I did X because...' — your individual reasoning is what's evaluated",
+      "Keep Situation + Task under 60 seconds total. Action should be 2–3 minutes.",
+      "Always end with 'what I learned' — Google interviewers listen for growth mindset"
+    ]
+  },
+  {
+    week:"Week 8",title:"Influence & Leadership Stories",
+    stories:[
+      {title:"Influenced Without Authority",prompt:"Tell me about a time you convinced teammates to adopt your approach without being their manager.",s:"The team structure, the proposal, why it was contentious",t:"You had no authority to mandate the change",a:"How you built the case (data, prototype, gradual buy-in)",r:"Adoption rate, technical outcome"},
+      {title:"Pushed Back on a Bad Technical Decision",prompt:"Describe a time you identified a technical flaw in a plan someone senior had already committed to.",s:"The plan, your seniority vs theirs, the stakes",t:"You saw the flaw and had to decide whether to speak up",a:"How you framed it (not as 'you're wrong' but 'here's a risk I see'), how they responded",r:"Did the plan change? Did your relationship survive?"}
+    ],
+    tips:[
+      "For Uber/Amazon behavioral rounds: their values are explicit — prep stories that match their stated principles directly",
+      "Amazon leadership principles most tested for SDE-2: Ownership, Dive Deep, Disagree and Commit, Deliver Results",
+      "Uber values: Make Magic (go beyond), Be Yourself (authenticity), Build Globally (scale thinking)"
+    ]
+  },
+  {
+    week:"Week 9",title:"Articulation & Delivery Practice",
+    stories:[
+      {title:"Most Technically Complex Project",prompt:"Walk me through the most technically complex thing you've built at RingCentral.",s:"The system, why it was complex",t:"Your specific contribution",a:"The key technical decisions (data structures, APIs, scaling considerations)",r:"Impact in numbers — even rough ones ('reduced latency by ~30%')"}
+    ],
+    tips:[
+      "ARTICULATION FIX #1: Record yourself on phone for 3 minutes answering a behavioral question. Listen back. Most people are surprised how many filler words they use.",
+      "ARTICULATION FIX #2: Start every story with a strong opener: 'At RingCentral, I led the migration of our notification pipeline...' — not 'So there was this project...'",
+      "ARTICULATION FIX #3: Practice the 'so what' close — every story must end with explicit impact. If you can't quantify, say 'this was significant because...'",
+      "ARTICULATION FIX #4: Use the Pause, not the filler. When you need to think, say nothing for 1-2 seconds instead of 'um' or 'like'. Silence reads as confidence.",
+      "30min/day schedule: Mon — write story draft. Tue — record verbal version. Wed — listen + fix filler words. Thu — tell it to a friend/record again. Fri — one new story."
+    ]
+  }
+];
+
+// ═══ RENDER FUNCTIONS ═══
+
+function renderWeeklyPlan() {
+  const container = document.getElementById('wpanels');
+  WEEKS.forEach((w, i) => {
+    const div = document.createElement('div');
+    div.className = 'wpanel' + (i===0?' active':'');
+    div.id = 'wp-'+i;
+
+    const dsaSections = w.dsa.sections.map(s => `
+      <div class="slabel">${s.label}</div>
+      <div class="probs">
+        ${s.probs.map(p=>`<div class="prob${p.hi?' hi':''}"><span>${p.n}</span><span class="lc">${p.lc||''}</span></div>`).join('')}
+      </div>
+    `).join('');
+
+    const lldContent = w.lld.steps ? w.lld.steps.map(s=>`<div class="step"><span class="sn">${s.n}</span><span>${s.t}</span></div>`).join('') : '';
+    const hldContent = w.hld.steps ? w.hld.steps.map(s=>`<div class="step"><span class="sn">${s.n}</span><span>${s.t}</span></div>`).join('') : '';
+
+    let milestoneHtml = '';
+    if(w.milestone){
+      milestoneHtml = `<div class="mbanner"><div class="icon">🎯</div><div><strong>APRIL 1 — APPLY TO GOOGLE</strong><p>Submit your application today and message all 3 college contacts. The recruiter process takes 3–6 weeks — you'll have time to keep prepping. Waiting longer is not strategy. See the Behavioral tab for the referral message template.</p></div></div>`;
+    }
+
+    div.innerHTML = `
+      <div class="wph">
+        <div><div class="wp-title">${w.title}</div><div class="wp-dates">${w.dates}</div></div>
+        <div class="wp-focus">${w.focus}</div>
+      </div>
+      <div class="wcols">
+        <div class="card">
+          <div class="ch dsa"><div class="dot"></div>${w.dsa.label}<span class="hrs">${w.dsa.hrs}</span></div>
+          <div class="cb">${dsaSections}${w.dsa.note?`<div class="note">${w.dsa.note}</div>`:''}</div>
+        </div>
+        <div class="card">
+          <div class="ch lld"><div class="dot"></div>${w.lld.label}<span class="hrs">${w.lld.hrs||''}</span></div>
+          <div class="cb">${lldContent}</div>
+        </div>
+        <div class="card">
+          <div class="ch hld"><div class="dot"></div>${w.hld.label}<span class="hrs">${w.hld.hrs||''}</span></div>
+          <div class="cb">${hldContent}</div>
+        </div>
+      </div>
+      ${milestoneHtml}
+      <div class="wbot">
+        <div class="card">
+          <div class="ch contest"><div class="dot"></div>SUNDAY · LC Contest</div>
+          <div class="cb"><div class="step"><span class="sn">→</span><span>${w.contest}</span></div></div>
+        </div>
+        <div class="card">
+          <div class="ch mock"><div class="dot"></div>Mock Interviews</div>
+          <div class="cb"><div class="step"><span class="sn">→</span><span>${w.mock}</span></div></div>
+        </div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function renderTracker() {
+  const container = document.getElementById('tracker-content');
+  let html = '';
+  
+  // DSA
+  html += `<div class="progress-section" id="sec-dsa"><div class="ps-head" onclick="toggleSec(this)"><div class="ps-title"><span class="leg-dot" style="background:var(--dsa);width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0"></span>DSA Problems</div><div style="display:flex;gap:12px;align-items:center"><span class="ps-count" id="cnt-dsa">0/106</span><span class="toggle-icon">▾</span></div></div><div class="ps-body">`;
+  for(const [topic, probs] of Object.entries(TRACKER_DATA)){
+    html += `<div class="slabel" style="margin-top:12px">${topic}</div><div class="check-grid">`;
+    probs.forEach((p,i)=>{
+      const id = `dsa-${topic.replace(/\s/g,'-')}-${i}`;
+      html += `<div class="check-item" id="ci-${id}"><input type="checkbox" id="${id}" onchange="updateProgress()" data-type="dsa"><label for="${id}">${p.n} <span class="lc-tag">${p.lc}</span></label></div>`;
+    });
+    html += `</div>`;
+  }
+  html += `</div></div>`;
+
+  // LLD
+  html += `<div class="progress-section" id="sec-lld"><div class="ps-head" onclick="toggleSec(this)"><div class="ps-title"><span class="leg-dot" style="background:var(--lld);width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0"></span>LLD Designs</div><div style="display:flex;gap:12px;align-items:center"><span class="ps-count" id="cnt-lld">0/12</span><span class="toggle-icon">▾</span></div></div><div class="ps-body"><div class="check-grid" style="margin-top:8px">`;
+  LLD_TRACKER.forEach((item,i)=>{
+    const id = `lld-${i}`;
+    const pre = item.endsWith('✅');
+    html += `<div class="check-item${pre?' done':''}" id="ci-${id}"><input type="checkbox" id="${id}" onchange="updateProgress()" data-type="lld"${pre?' checked':''}><label for="${id}">${item}</label></div>`;
+  });
+  html += `</div></div></div>`;
+
+  // HLD
+  html += `<div class="progress-section" id="sec-hld"><div class="ps-head" onclick="toggleSec(this)"><div class="ps-title"><span class="leg-dot" style="background:var(--hld);width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0"></span>HLD Systems</div><div style="display:flex;gap:12px;align-items:center"><span class="ps-count" id="cnt-hld">0/11</span><span class="toggle-icon">▾</span></div></div><div class="ps-body"><div class="check-grid" style="margin-top:8px">`;
+  HLD_TRACKER.forEach((item,i)=>{
+    const id = `hld-${i}`;
+    html += `<div class="check-item" id="ci-${id}"><input type="checkbox" id="${id}" onchange="updateProgress()" data-type="hld"><label for="${id}">${item}</label></div>`;
+  });
+  html += `</div></div></div>`;
+
+  container.innerHTML = html;
+  loadProgress();
+  updateProgress();
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-content');
+  const srcColors = {medium:"#f97316",lc_discuss:"#f59e0b","lc-discuss":"#f59e0b",glassdoor:"#10b981",guide:"#6366f1"};
+  const srcLabels = {medium:"Medium",lc_discuss:"LC Discuss","lc-discuss":"LC Discuss",glassdoor:"Glassdoor",guide:"Guide"};
+  
+  const companies = ['all','google','uber','atlassian','meta','amazon'];
+  let html = '';
+  companies.forEach(co => {
+    const qs = co === 'all' ? REAL_QUESTIONS : REAL_QUESTIONS.filter(q=>q.company===co);
+    html += `<div class="company-panel${co==='all'?' active':''}" id="co-${co}">`;
+    qs.forEach(q => {
+      const diffClass = q.difficulty==='hard'?'tag-hard':q.difficulty==='medium'?'tag-med':'tag-easy';
+      const typeClass = q.type==='dsa'?'dsa-badge':q.type==='lld'?'lld-badge':'hld-badge';
+      const srcColor = srcColors[q.sourceType] || '#6b7280';
+      const srcLabel = srcLabels[q.sourceType] || q.sourceType;
+      html += `
+        <div class="iq-card">
+          <div class="iq-head">
+            <div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:4px">
+                <span class="iq-badge ${typeClass}">${q.type.toUpperCase()}</span>
+                <span class="${diffClass}">${q.difficulty}</span>
+                <span class="round-badge">${q.round}</span>
+                ${co==='all'?`<span style="font-size:.58rem;color:var(--muted);padding:2px 6px;border-radius:3px;background:var(--surf2)">${q.company.toUpperCase()}</span>`:''}
+              </div>
+            </div>
+          </div>
+          <div class="iq-body">
+            <div class="iq-question">${q.title}</div>
+            <div style="font-size:.61rem;color:var(--muted);line-height:1.65;margin-bottom:8px">${q.question}</div>
+            <div class="iq-pattern">Pattern: <span>${q.pattern}</span>${q.lcNum?` · LC${q.lcNum}`:''}</div>
+            <div class="iq-tags">${q.tags.map(t=>`<span class="iq-tag">${t}</span>`).join('')}</div>
+            <div class="iq-source">
+              <span class="source-badge" style="background:${srcColor}20;color:${srcColor};border-color:${srcColor}40">${srcLabel}</span>
+              <span>${q.source}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderBehavioral() {
+  const container = document.getElementById('behavioral-content');
+  let html = '';
+  BEHAVIORAL_DATA.forEach((section, si) => {
+    html += `
+      <div class="beh-section">
+        <div class="beh-sh" onclick="toggleBeh(this)">
+          <div>
+            <div class="beh-sh-title">${section.title}</div>
+            <div class="beh-sh-week">${section.week} · ${section.stories.length} stories + articulation tips</div>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="beh-body">
+          ${section.stories.map(story => `
+            <div class="story-card">
+              <div class="sc-title">${story.title}</div>
+              <div class="sc-prompt">"${story.prompt}"</div>
+              <div class="sc-grid">
+                <div class="sc-field"><div class="sc-field-label" style="color:var(--star)">S — SITUATION</div><textarea placeholder="${story.s}" rows="3"></textarea></div>
+                <div class="sc-field"><div class="sc-field-label" style="color:var(--accent)">T — TASK</div><textarea placeholder="${story.t}" rows="3"></textarea></div>
+                <div class="sc-field"><div class="sc-field-label" style="color:var(--dsa)">A — ACTION (60% of answer)</div><textarea placeholder="${story.a}" rows="3"></textarea></div>
+                <div class="sc-field"><div class="sc-field-label" style="color:var(--hld)">R — RESULT</div><textarea placeholder="${story.r}" rows="3"></textarea></div>
+              </div>
+            </div>
+          `).join('')}
+          <div class="articulation-tip">
+            <div class="at-title">💡 Tips for ${section.title}</div>
+            ${section.tips.map(t=>`<div class="at-item"><span class="at-bullet">→</span><span>${t}</span></div>`).join('')}
+          </div>
+          <div class="week-schedule">
+            <div class="slabel" style="margin-top:12px">30min/day schedule during ${section.week}</div>
+            <div class="ws-row"><span class="ws-day">Mon</span><span class="ws-task">Write the STAR story in text (don't worry about polish)</span></div>
+            <div class="ws-row"><span class="ws-day">Tue</span><span class="ws-task">Record yourself saying it out loud (phone voice memo)</span></div>
+            <div class="ws-row"><span class="ws-day">Wed</span><span class="ws-task">Listen back — mark every filler word (um, like, so)</span></div>
+            <div class="ws-row"><span class="ws-day">Thu</span><span class="ws-task">Re-record, fixing fillers. Tell it to a friend if possible.</span></div>
+            <div class="ws-row"><span class="ws-day">Fri</span><span class="ws-task">One new story. Rotate the oldest into quick-recall mode.</span></div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+// ═══ INTERACTION ═══
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  el.classList.add('active');
+}
+
+function showWk(i) {
+  document.querySelectorAll('.wpanel').forEach((p,j)=>p.classList.toggle('active',j===i));
+  document.querySelectorAll('.wtab').forEach((t,j)=>t.classList.toggle('active',j===i));
+}
+
+function showCo(co, el) {
+  document.querySelectorAll('.company-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('co-'+co).classList.add('active');
+  el.classList.add('active');
+}
+
+function toggleSec(el) {
+  el.parentElement.classList.toggle('collapsed');
+}
+
+function toggleBeh(el) {
+  el.parentElement.classList.toggle('collapsed');
+}
+
+function updateProgress() {
+  const types = {dsa:{total:106, ids:[]}, lld:{total:12, ids:[]}, hld:{total:11, ids:[]}};
+  document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    const t = cb.dataset.type;
+    if(t && types[t]) types[t].ids.push({cb, checked: cb.checked});
+  });
+
+  ['dsa','lld','hld'].forEach(t => {
+    const checked = document.querySelectorAll(`input[data-type="${t}"]:checked`).length;
+    const total = types[t].total;
+    document.getElementById(`${t}-prog`).textContent = `${checked}/${total}`;
+    document.getElementById(`${t}-bar`).style.width = `${Math.round(checked/total*100)}%`;
+    const cnt = document.getElementById(`cnt-${t}`);
+    if(cnt) cnt.textContent = `${checked}/${total}`;
+  });
+
+  document.querySelectorAll('.check-item').forEach(ci => {
+    const cb = ci.querySelector('input');
+    if(cb) ci.classList.toggle('done', cb.checked);
+  });
+
+  saveProgress();
+}
+
+function saveProgress() {
+  const data = {};
+  document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    if(cb.id) data[cb.id] = cb.checked;
+  });
+  try{ localStorage.setItem('faang_progress', JSON.stringify(data)); } catch(e){}
+}
+
+function loadProgress() {
+  try{
+    const data = JSON.parse(localStorage.getItem('faang_progress')||'{}');
+    Object.entries(data).forEach(([id,val]) => {
+      const el = document.getElementById(id);
+      if(el) el.checked = val;
+    });
+  } catch(e){}
+}
+
+function resetAll() {
+  if(!confirm('Reset all progress?')) return;
+  document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    if(!cb.closest('label')?.textContent.includes('✅')) cb.checked = false;
+  });
+  try{ localStorage.removeItem('faang_progress'); } catch(e){}
+  updateProgress();
+}
+
+// Init
+renderWeeklyPlan();
+renderTracker();
+renderQuestions();
+renderBehavioral();
+</script>
+</body>
+</html>

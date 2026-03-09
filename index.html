@@ -313,7 +313,7 @@ body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospa
       <div class="op-row">
         <div class="op-item"><div class="op-n" style="color:var(--dsa)" id="dsa-prog">0/106</div><div class="op-l">DSA PROBLEMS</div><div class="progress-bar-wrap" style="margin-top:6px"><div class="progress-bar" style="background:var(--dsa);width:0%" id="dsa-bar"></div></div></div>
         <div class="op-item"><div class="op-n" style="color:var(--lld)" id="lld-prog">0/12</div><div class="op-l">LLD DESIGNS</div><div class="progress-bar-wrap" style="margin-top:6px"><div class="progress-bar" style="background:var(--lld);width:0%" id="lld-bar"></div></div></div>
-        <div class="op-item"><div class="op-n" style="color:var(--hld)" id="hld-prog">0/11</div><div class="op-l">HLD SYSTEMS</div><div class="progress-bar-wrap" style="margin-top:6px"><div class="progress-bar" style="background:var(--hld);width:0%" id="hld-bar"></div></div></div>
+        <div class="op-item"><div class="op-n" style="color:var(--hld)" id="hld-prog">0/53</div><div class="op-l">HLD MODULES</div><div class="progress-bar-wrap" style="margin-top:6px"><div class="progress-bar" style="background:var(--hld);width:0%" id="hld-bar"></div></div></div>
       </div>
     </div>
     <div id="tracker-content"></div>
@@ -382,7 +382,7 @@ body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospa
 // ═══ DATA ═══
 const WEEKS = [
   {
-    title:"Week 1 — Linked Lists & Trees Start",dates:"March 1–7",focus:"DSA: LL + Trees | LLD: Decorator+Builder | HLD: CAP+SQL+Cache",
+    title:"Week 1 — Linked Lists & Trees Start",dates:"March 1–7",focus:"DSA: LL + Trees | LLD: Decorator+Builder | HLD: Numbers to Know",
     dsa:{label:"DSA — Linked List + Trees",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Linked Lists",probs:[{n:"Reverse LL",lc:"#206",hi:1},{n:"Merge Two Sorted",lc:"#21",hi:1},{n:"Cycle II",lc:"#142",hi:1},{n:"Remove Nth",lc:"#19"},{n:"Reorder List",lc:"#143"},{n:"Reverse K-Group",lc:"#25",hi:1},{n:"Merge K Sorted",lc:"#23",hi:1},{n:"Copy Random Ptr",lc:"#138",hi:1},{n:"LRU Cache",lc:"#146",hi:1},{n:"Find Duplicate",lc:"#287"}]},
       {label:"Thu–Sat · Trees Start",probs:[{n:"Right Side View",lc:"#199",hi:1},{n:"Vertical Order",lc:"#987",hi:1},{n:"Validate BST",lc:"#98",hi:1},{n:"Kth Smallest BST",lc:"#230",hi:1},{n:"BST Iterator",lc:"#173"}]},
@@ -392,18 +392,17 @@ const WEEKS = [
       {n:"Sat",t:"Builder Pattern: separate complex object construction. Implement QueryBuilder or HTTP Request builder."},
       {n:"Note",t:"No full system yet — just get the two patterns sharp. You'll apply both in Week 2."}
     ]},
-    hld:{label:"HLD — Core Concepts I",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"CAP Theorem: CP vs AP, why Cassandra (AP) vs HBase (CP), why CAP consistency ≠ ACID consistency"},
-      {n:"Fri",t:"SQL vs NoSQL: ACID vs BASE, when to use Document/KV/Wide-column/Graph DB, real examples"},
-      {n:"Sat",t:"Caching: cache-aside, write-through, write-back, LRU/LFU eviction, cache stampede problem"},
-      {n:"Resource",t:"ByteByteGo YouTube — 3 videos (15min each). Don't open Alex Xu yet."}
+    hld:{label:"HLD — Core Concepts I: Numbers to Know",hrs:"~2.5hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Numbers to Know. Throughput (QPS), latency (p99), storage math, bandwidth benchmarks. These numbers come up in every design — you'll be expected to estimate without a calculator."},
+      {n:"Fri",t:"Build your own reference card: 1 page, memory-sized units (KB/MB/GB/TB), time units (μs/ms/s), common DB/cache/network benchmarks. Stick it to your wall."},
+      {n:"Note",t:"No full system design this week. Core Concepts first — W1–4 is foundation only. System designs start W4."}
     ]},
     revision:{dsa:[],lld:[],hld:[],note:"Week 1: No revision yet — you're building fresh. Start tracking which LL problems feel shaky."},
     contest:"Contest (2hrs) + 1hr upsolve. Track: how fast do you finish Q1+Q2?",
     mock:"No mocks yet. Week 3 is the earliest. Do 1 solo timed session Sat: 2 mediums, 45min, no hints."
   },
   {
-    title:"Week 2 — Hard Trees + Notification System",dates:"March 8–14",focus:"DSA: Hard Trees + Stack | LLD: Notification System | HLD: Load Balancing + CDN",
+    title:"Week 2 — Hard Trees + Notification System",dates:"March 8–14",focus:"DSA: Hard Trees + Stack | LLD: Notification System | HLD: Networking + API Design",
     dsa:{label:"DSA — Trees Completion + Stack Gaps",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Hard Tree Problems",probs:[{n:"Max Path Sum",lc:"#124",hi:1},{n:"Serialize/Deserialize",lc:"#297",hi:1},{n:"Build Pre+Inorder",lc:"#105",hi:1},{n:"Count Good Nodes",lc:"#1448"},{n:"Diameter of BT",lc:"#543"}]},
       {label:"Thu · Remaining Trees",probs:[{n:"Flatten BT→LL",lc:"#114"},{n:"Populate Next Ptrs",lc:"#116"},{n:"Path Sum II",lc:"#113"},{n:"House Robber III",lc:"#337",hi:1}]},
@@ -414,17 +413,17 @@ const WEEKS = [
       {n:"1",t:"Observer: events trigger notifications. Decorator: stack channels (Email+SMS+Push)."},
       {n:"2",t:"Code fully. Claude review prompt: 'Check SOLID, edge cases, is Decorator vs Strategy more appropriate, concurrency, what would interviewer probe. Rate each 1-10 with fixes.'"},
     ]},
-    hld:{label:"HLD — Load Balancing + CDN",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"Load Balancers: L4 vs L7, round-robin vs least-conn vs IP hash vs consistent hash, health checks"},
-      {n:"Fri",t:"CDN: Push vs Pull, cache invalidation, when to use. Consistent Hashing: why mod-N fails, virtual nodes"},
-      {n:"Note",t:"These come up in almost every HLD discussion. Must be explainable without notes by Week 4."}
+    hld:{label:"HLD — Core Concepts II: Networking + API Design",hrs:"~2.5hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Networking Essentials. HTTP/1.1 vs HTTP/2 vs HTTP/3, TCP vs UDP, WebSocket, long-polling, SSE, DNS, load balancers (L4 vs L7), CDN (push vs pull)."},
+      {n:"Fri",t:"📖 Hello Interview → API Design. REST constraints, idempotency (critical for payments), pagination (cursor vs offset), API versioning, GraphQL vs REST trade-offs."},
+      {n:"Note",t:"These come up in every HLD round. Must be explainable in <60 seconds flat. No notes."}
     ]},
-    revision:{dsa:["Linked Lists (all 10) — read Notion note → close it → recode from scratch → compare"],lld:[],hld:["CAP Theorem — redraw the CP/AP diagram from memory"],note:"Spaced rep: Week 1 DSA. LLD patterns are too new to revise yet."},
+    revision:{dsa:["Linked Lists (all 10) — read Notion note → close it → recode from scratch → compare"],lld:[],hld:["Numbers to Know — write your benchmarks reference from memory. Check against your card."],note:"Spaced rep: Week 1 DSA. LLD patterns are too new to revise yet."},
     contest:"Contest + 1hr upsolve. Add new patterns to your pattern sheet.",
     mock:"1 solo timed mock Sat: 2 unseen mediums, 45min total. No hints. Talk out loud even alone."
   },
   {
-    title:"Week 3 — Backtracking + Vending Machine",dates:"March 15–21",focus:"DSA: Backtracking + Greedy | LLD: Vending Machine (State) | HLD: Sharding + Replication",
+    title:"Week 3 — Backtracking + Vending Machine",dates:"March 15–21",focus:"DSA: Backtracking + Greedy | LLD: Vending Machine (State) | HLD: Data Modeling + DB Indexing",
     dsa:{label:"DSA — Backtracking + Greedy",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Backtracking Core",probs:[{n:"Subsets",lc:"#78",hi:1},{n:"Subsets II",lc:"#90",hi:1},{n:"Permutations",lc:"#46",hi:1},{n:"Combo Sum",lc:"#39",hi:1},{n:"Combo Sum II",lc:"#40",hi:1}]},
       {label:"Thu · Backtracking Hard",probs:[{n:"Word Search",lc:"#79",hi:1},{n:"N-Queens",lc:"#51",hi:1},{n:"Sudoku Solver",lc:"#37"},{n:"Palindrome Partition",lc:"#131"},{n:"Letter Combos",lc:"#17"}]},
@@ -435,17 +434,17 @@ const WEEKS = [
       {n:"1",t:"States: Idle → HasMoney → Dispensing → OutOfStock. Transitions: insertCoin(), selectItem(), dispense(), refund()"},
       {n:"2",t:"Command Pattern (concept only): encapsulate request as object → enables undo/redo, queue, log"}
     ]},
-    hld:{label:"HLD — Sharding + Replication",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"Sharding: range (hotspot problem) vs hash (no range queries) vs consistent hash (best of both)"},
-      {n:"Fri",t:"Replication: leader-follower, sync vs async, read replicas, replication lag problem, multi-leader"},
-      {n:"Note",t:"These are the backbone of every DB discussion. Should be second nature by Week 4."}
+    hld:{label:"HLD — Core Concepts III: Data Modeling + DB Indexing",hrs:"~2.5hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Data Modeling. Relational vs document vs wide-column vs graph. When to denormalize. Foreign keys vs embedding. Twitter schema as the worked example."},
+      {n:"Fri",t:"📖 Hello Interview → DB Indexing. B-tree vs LSM tree internals, composite indexes, covering indexes, read vs write trade-off, when an index hurts."},
+      {n:"Note",t:"Pair with LRU Cache from W1 DSA — DB caching layer is just LRU at scale. Same concept, different skin."}
     ]},
-    revision:{dsa:["Trees (all 13) — recode #124 Max Path Sum and #297 Serialize cold","Linked Lists — 3 shaky ones from W1, recode without notes"],lld:["Decorator + Builder patterns — re-implement Coffee decorator from scratch","Notification System — redraw class diagram, then recode core send() flow"],hld:["SQL vs NoSQL — write a 5-line comparison from memory","Caching — explain write-through vs cache-aside out loud"],note:"W3 Sunday: this is your first real revision day. The Notion workflow: read problem → close laptop → recode → compare."},
+    revision:{dsa:["Trees (all 13) — recode #124 Max Path Sum and #297 Serialize cold","Linked Lists — 3 shaky ones from W1, recode without notes"],lld:["Decorator + Builder patterns — re-implement Coffee decorator from scratch","Notification System — redraw class diagram, then recode core send() flow"],hld:["Networking Essentials — explain WebSocket vs long-polling out loud. When to use each?","API Design — explain idempotency out loud. Why does it matter for payments?"],note:"W3 Sunday: this is your first real revision day. The Notion workflow: read problem → close laptop → recode → compare."},
     contest:"Contest + 1hr upsolve. 1 timed hard problem (40min, no hints) after upsolve.",
     mock:"1 Pramp mock (DSA) — your first live mock. It will feel uncomfortable. Say your approach BEFORE coding."
   },
   {
-    title:"Week 4 — Graphs + Splitwise",dates:"March 22–28",focus:"DSA: Graph BFS/DFS + DSU | LLD: Splitwise | HLD: Message Queues + TinyURL Deep",
+    title:"Week 4 — Graphs + Splitwise",dates:"March 22–28",focus:"DSA: Graph BFS/DFS + DSU | LLD: Splitwise | HLD: Caching + Sharding + CAP [Core Concepts ✅]",
     dsa:{label:"DSA — Graph BFS/DFS + DSU",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Grid BFS/DFS",probs:[{n:"Number of Islands",lc:"#200",hi:1},{n:"Max Area Island",lc:"#695",hi:1},{n:"Rotting Oranges",lc:"#994",hi:1},{n:"Pacific Atlantic",lc:"#417",hi:1},{n:"Word Ladder",lc:"#127",hi:1}]},
       {label:"Thu · General Graph",probs:[{n:"Clone Graph",lc:"#133",hi:1},{n:"Walls and Gates",lc:"#286"},{n:"Surrounded Regions",lc:"#130"},{n:"Find Safe States",lc:"#802"},{n:"Is Bipartite",lc:"#785"}]},
@@ -457,17 +456,18 @@ const WEEKS = [
       {n:"2",t:"Balance graph: User→User→Amount. Simplify algo: reduce transactions using net balances (greedy)"},
       {n:"3",t:"Code fully + Claude review. Budget 3.5hrs — this problem is that rich."}
     ]},
-    hld:{label:"HLD — Message Queues + TinyURL Deep",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"Kafka: topics, partitions, consumer groups, offsets. At-least-once vs exactly-once vs at-most-once."},
-      {n:"Fri",t:"TinyURL full design: Base62, DB choice (Cassandra, why), Redis caching, sharding, analytics via Kafka"},
-      {n:"Note",t:"TinyURL done properly is your HLD framework template. Every other system uses the same skeleton."}
+    hld:{label:"HLD — Core Concepts IV: Caching + Sharding + CAP [Core Complete]",hrs:"~3hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Caching. Cache-aside, write-through, write-back. LRU vs LFU eviction. Cache stampede + solutions. Redis as a cache. Then: Sharding — range vs hash vs consistent hash, hotspot problem."},
+      {n:"Fri",t:"📖 Hello Interview → Consistent Hashing + CAP Theorem. Virtual nodes (why mod-N fails). CP vs AP real examples (Cassandra vs HBase). Why CAP consistency ≠ ACID consistency."},
+      {n:"✅",t:"Core Concepts done by end of W4. First system design sketch: Sat 30min — attempt TinyURL layout from memory using the Hello Interview framework (clarify → estimate → design → deep dive). First pass only."},
+      {n:"Note",t:"TinyURL will feel incomplete right now — that's fine. You'll revisit it in W9 with patterns and technologies loaded."}
     ]},
-    revision:{dsa:["Backtracking — recode Subsets + Permutations cold (template recall check)","Greedy — recode Jump Game II and Gas Station cold"],lld:["Vending Machine — recode State machine from scratch (all 4 states + transitions)"],hld:["Sharding — draw consistent hash ring from memory, explain virtual nodes","Replication — explain async vs sync trade-offs in 60 seconds"],note:"Pattern check: can you write the backtracking template from memory in 30 seconds? That's the bar."},
+    revision:{dsa:["Backtracking — recode Subsets + Permutations cold (template recall check)","Greedy — recode Jump Game II and Gas Station cold"],lld:["Vending Machine — recode State machine from scratch (all 4 states + transitions)"],hld:["Data Modeling — sketch Twitter schema from memory (users, tweets, follows, likes)","DB Indexing — explain B-tree vs LSM trade-off out loud in 60 seconds"],note:"Pattern check: can you write the backtracking template from memory in 30 seconds? That's the bar."},
     contest:"Contest + 1hr upsolve. Review DSU — can you write it cold in 5min?",
     mock:"1 Pramp mock (DSA). 1 solo LLD mock Sat: 'Design ATM Machine' cold 45min, then Claude review."
   },
   {
-    title:"Week 5 — Dijkstra's + Elevator + APPLY",dates:"March 29 – April 4",focus:"APPLY TO GOOGLE: APRIL 1. DSA: Weighted Graphs + BS | LLD: Elevator | HLD: Rate Limiter + KV Store",milestone:true,
+    title:"Week 5 — Dijkstra's + Elevator + APPLY",dates:"March 29 – April 4",focus:"APPLY TO GOOGLE: APRIL 1. DSA: Weighted Graphs + BS | LLD: Elevator | HLD: Real-time Updates + Contention",milestone:true,
     dsa:{label:"DSA — Weighted Graphs + Binary Search on Answer",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Dijkstra's",probs:[{n:"Network Delay",lc:"#743",hi:1},{n:"Cheapest Flights K",lc:"#787",hi:1},{n:"Swim Rising Water",lc:"#778"},{n:"Min Effort Path",lc:"#1631"}]},
       {label:"Thu · Binary Search on Answer",probs:[{n:"Koko Bananas",lc:"#875",hi:1},{n:"Capacity to Ship",lc:"#1011",hi:1},{n:"Split Array Largest",lc:"#410",hi:1},{n:"K Closest Elements",lc:"#658",hi:1}]},
@@ -478,17 +478,18 @@ const WEEKS = [
       {n:"1",t:"Scheduling: SCAN algorithm — move one direction until no more requests, then reverse"},
       {n:"2",t:"Multi-elevator: dispatcher assigns nearest idle elevator. Code + Claude review asking about race conditions."}
     ]},
-    hld:{label:"HLD — Rate Limiter + Key-Value Store",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"Rate Limiter: token bucket, leaky bucket, sliding window log. Distributed: Redis + Lua for atomicity."},
-      {n:"Fri",t:"KV Store: consistent hash partitioning, N replicas, quorum (W+R>N), vector clocks, SSTable + LSM tree"}
+    hld:{label:"HLD — Patterns I: Real-time Updates + Dealing with Contention",hrs:"~3hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Real-time Updates. Polling vs long-polling vs WebSocket vs SSE — when to use each, overhead trade-offs, which to recommend for chat vs live scores vs notifications."},
+      {n:"Fri",t:"📖 Hello Interview → Dealing with Contention. Distributed locks (Redis SETNX), optimistic vs pessimistic locking, idempotency keys, why idempotency is non-negotiable in payment systems."},
+      {n:"Practice",t:"Sat 45min: Rate Limiter full design — token bucket, leaky bucket, sliding window. Apply Real-time Updates + Contention patterns. This is your first full design with patterns loaded."}
     ]},
-    revision:{dsa:["Graphs BFS/DFS — recode Number of Islands + Pacific Atlantic cold","DSU — recode path compression + union by rank from scratch (5min target)","Linked Lists revisit — LRU Cache cold (this is your 3rd rep, should be fast now)"],lld:["Notification System — full recode from scratch, no notes, 45min","Splitwise — redraw class diagram + recode SplitStrategy hierarchy"],hld:["TinyURL — redraw 4-box architecture from memory + explain every component","Load Balancer — explain L4 vs L7 difference out loud, 60 sec each"],note:"APRIL 1: Apply + message contacts. Revision continues regardless — don't let the application day become a zero-work day."},
+    revision:{dsa:["Graphs BFS/DFS — recode Number of Islands + Pacific Atlantic cold","DSU — recode path compression + union by rank from scratch (5min target)","Linked Lists revisit — LRU Cache cold (this is your 3rd rep, should be fast now)"],lld:["Notification System — full recode from scratch, no notes, 45min","Splitwise — redraw class diagram + recode SplitStrategy hierarchy"],hld:["Caching + CAP — explain cache-aside vs write-through out loud + CP/AP examples","Consistent Hashing — draw virtual node ring from memory, explain why mod-N fails"],note:"APRIL 1: Apply + message contacts. Revision continues regardless — don't let the application day become a zero-work day."},
     milestone:"APRIL 1 — Apply to Google. Message all 3 college contacts same day. Referral template is on the Behavioral tab.",
     contest:"Contest + 1hr upsolve. Write your pattern sheet summary — should have 20+ patterns by now.",
     mock:"1 Pramp DSA mock. 1 solo LLD mock: 'Design Vending Machine' cold. Begin tracking time-to-pattern metric."
   },
   {
-    title:"Week 6 — Heaps + BookMyShow + News Feed",dates:"April 5–11",focus:"DSA: Heaps + Trie + 2D DP | LLD: BookMyShow (concurrency) | HLD: Twitter/News Feed",
+    title:"Week 6 — Heaps + BookMyShow + News Feed",dates:"April 5–11",focus:"DSA: Heaps + Trie + 2D DP | LLD: BookMyShow (concurrency) | HLD: Multi-step + Scaling Reads/Writes",
     dsa:{label:"DSA — Heaps + Trie + 2D DP",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Heap Core",probs:[{n:"Median from Stream",lc:"#295",hi:1},{n:"Top K Frequent",lc:"#347",hi:1},{n:"K Closest Points",lc:"#973",hi:1},{n:"Task Scheduler",lc:"#621",hi:1},{n:"Design Twitter",lc:"#355"}]},
       {label:"Thu · Trie",probs:[{n:"Implement Trie",lc:"#208",hi:1},{n:"Add+Search Words",lc:"#211",hi:1},{n:"Word Search II",lc:"#212",hi:1},{n:"Max XOR",lc:"#421"},{n:"Search Suggestions",lc:"#1268"}]},
@@ -500,17 +501,18 @@ const WEEKS = [
       {n:"2",t:"Solution: optimistic locking (version number) vs pessimistic (DB row lock). Code + review asking about races."},
       {n:"Note",t:"You don't need to implement thread-safe code perfectly — identify the problem and discuss trade-offs. That's the bar."}
     ]},
-    hld:{label:"HLD — Twitter/News Feed",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"Fan-out on write: precompute feeds, fast reads, write amplification for celebrities"},
-      {n:"Fri",t:"Fan-out on read: lazy, no amplification, slow reads at scale"},
-      {n:"Note",t:"Hybrid: write for normal users, read for celebrities (>1M followers). Celebrity problem = Google's favourite follow-up."}
+    hld:{label:"HLD — Patterns II: Multi-step + Scaling Reads + Scaling Writes",hrs:"~3hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Multi-step Processes + Scaling Reads. Saga pattern, outbox pattern (avoid dual-write), CQRS, read replicas, denormalization for reads, materialized views."},
+      {n:"Fri",t:"📖 Hello Interview → Scaling Writes. Write-ahead log, sharding writes, async writes via queues, write amplification problem."},
+      {n:"Practice",t:"Fri evening 60min: Twitter/News Feed full design. Fan-out on write vs read — explicitly use your Scaling patterns here. Celebrity problem = Google's favourite follow-up."},
+      {n:"Note",t:"Fan-out on write = Scaling Writes pattern. Fan-out on read = Scaling Reads pattern. Hybrid = know when to switch."}
     ]},
-    revision:{dsa:["Dijkstra's — recode Network Delay Time cold (MinHeap + dist array)","Binary Search on Answer — recode Koko Bananas + Capacity to Ship cold","Intervals — recode Merge Intervals and Meeting Rooms II cold"],lld:["Elevator System — recode SCAN scheduler from scratch","BookMyShow — recode seat lock flow + explain optimistic locking approach"],hld:["Rate Limiter — draw token bucket + distributed Redis solution from memory","KV Store — explain quorum (W+R>N) out loud with a concrete N=3 example"],note:"Heap + Trie are new this week — no revision of them yet. Focus revision on Weeks 3–5 material."},
+    revision:{dsa:["Dijkstra's — recode Network Delay Time cold (MinHeap + dist array)","Binary Search on Answer — recode Koko Bananas + Capacity to Ship cold","Intervals — recode Merge Intervals and Meeting Rooms II cold"],lld:["Elevator System — recode SCAN scheduler from scratch","BookMyShow — recode seat lock flow + explain optimistic locking approach"],hld:["Real-time Updates — explain WebSocket vs SSE trade-offs cold. When does each win?","Dealing with Contention — explain optimistic locking + idempotency key pattern out loud"],note:"Heap + Trie are new this week — no revision of them yet. Focus revision on Weeks 3–5 material."},
     contest:"Contest + 1hr upsolve. Try to identify Q3 pattern within first 5 minutes — track this time.",
     mock:"1 Pramp DSA mock (focus on talking while coding). 1 HLD mock: 'Design Pastebin' solo."
   },
   {
-    title:"Week 7 — DP Completion + Chat System",dates:"April 12–18",focus:"DSA: Interval DP + Tree DP | LLD: Chess + Hotel | HLD: WhatsApp Chat",
+    title:"Week 7 — DP Completion + Chat System",dates:"April 12–18",focus:"DSA: Interval DP + Tree DP | LLD: Chess + Hotel | HLD: Large Blobs + Long Tasks [Patterns ✅]",
     dsa:{label:"DSA — DP Completion",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Interval DP + Strings",probs:[{n:"Burst Balloons",lc:"#312",hi:1},{n:"Min Cost Cut Stick",lc:"#1547"},{n:"Median Two Arrays",lc:"#4"},{n:"Distinct Subsequences",lc:"#115"},{n:"Wildcard Matching",lc:"#44"}]},
       {label:"Thu · Tree DP + Bitmask",probs:[{n:"BT Cameras",lc:"#968"},{n:"Partition K Sums",lc:"#698"},{n:"Min Interval Query",lc:"#1851",hi:1}]},
@@ -520,17 +522,18 @@ const WEEKS = [
       {n:"Wed",t:"Chess: Board, Cell, Piece (abstract), King/Queen/Rook/Bishop/Knight/Pawn. Each has getValidMoves(Board)."},
       {n:"Sat",t:"Hotel Management: Room (types via Factory), Booking lifecycle (reserve→checkin→checkout→billing), Room search."}
     ]},
-    hld:{label:"HLD — WhatsApp Chat (Alex Xu Ch 12)",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"WebSocket: why HTTP polling fails for real-time. Chat service: client ↔ chat server ↔ message store."},
-      {n:"Fri",t:"Message ordering: Snowflake ID. Online presence: heartbeat 5s + Redis. Group chat: fan-out, cap group size."},
-      {n:"Note",t:"Probe to prep: 'How do you guarantee message delivery when user is offline?' — have a crisp answer."}
+    hld:{label:"HLD — Patterns III: Large Blobs + Long Running Tasks [Patterns Done]",hrs:"~3hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Handling Large Blobs. Object storage (S3), chunked uploads, presigned URLs, CDN distribution, deduplication via content hash. Google Drive is the canonical worked example."},
+      {n:"Fri",t:"📖 Hello Interview → Managing Long Running Tasks. Job queues, worker pools, progress tracking endpoints, at-least-once retry with idempotency, dead letter queues."},
+      {n:"Practice",t:"Fri evening 60min: WhatsApp Chat full design. WebSocket for real-time, message ordering with Snowflake IDs, offline delivery, group fan-out. Apply your Real-time Updates pattern directly."},
+      {n:"✅",t:"Patterns done by end of W7. You can now reason about any HLD problem class systematically."}
     ]},
-    revision:{dsa:["Heap — recode Median from Stream (two heaps) cold","Trie — recode Implement Trie + Word Search II cold","Backtracking — N-Queens cold (25min target — if you miss it, that's a gap)"],lld:["News Feed → re-sketch fan-out on write vs read. When to switch to hybrid?","BookMyShow — recode full concurrency flow; ask Claude to probe race conditions"],hld:["Twitter/News Feed — redraw full architecture cold, explain celebrity problem fix","WhatsApp Chat — explain offline message delivery + message ordering cold"],note:"By W7 Sunday: you should be able to explain any design from Weeks 1–5 in 5min without notes."},
+    revision:{dsa:["Heap — recode Median from Stream (two heaps) cold","Trie — recode Implement Trie + Word Search II cold","Backtracking — N-Queens cold (25min target — if you miss it, that's a gap)"],lld:["Chess — recode Piece hierarchy + getValidMoves() for Knight cold","Hotel Management — redraw booking lifecycle (reserve→checkin→checkout→billing)"],hld:["Multi-step Processes — explain outbox pattern out loud. Why does dual-write fail?","Scaling Reads vs Writes — for News Feed: which pattern at which scale? Explain the transition."],note:"By W7 Sunday: you should be able to explain any design from Weeks 1–5 in 5min without notes."},
     contest:"Contest + 1hr upsolve. How many Q3s are you solving in contest time now?",
     mock:"1 Pramp DSA mock. 1 LLD cold mock: 'Design Library Management' 45min. Book 1 interviewing.io session for W8."
   },
   {
-    title:"Week 8 — Google Hard Problems + YouTube",dates:"April 19–25",focus:"DSA: Google Hard + Tagged | LLD: Uber Core | HLD: YouTube + Google Drive",
+    title:"Week 8 — Google Hard Problems + YouTube",dates:"April 19–25",focus:"DSA: Google Hard + Tagged | LLD: Uber Core | HLD: Redis + Kafka + Elasticsearch",
     dsa:{label:"DSA — Famous Google Problems",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Classic Google Hard",probs:[{n:"Guess the Word",lc:"#843",hi:1},{n:"Race Car",lc:"#818",hi:1},{n:"24 Game",lc:"#679",hi:1},{n:"Text Justification",lc:"#68",hi:1}]},
       {label:"Thu · Google Tagged",probs:[{n:"Stickers to Spell",lc:"#691",hi:1},{n:"Min Window Substr",lc:"#76",hi:1},{n:"Trapping Rain Water",lc:"#42",hi:1},{n:"Employee Free Time",lc:"#759"}]},
@@ -541,16 +544,18 @@ const WEEKS = [
       {n:"1",t:"Driver matching: Strategy (nearest, highest rated, surge area). Observer: notify rider on state change."},
       {n:"2",t:"Pricing: Strategy (standard, surge, pool). This design uses every pattern you've learned."}
     ]},
-    hld:{label:"HLD — YouTube + Google Drive",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"YouTube: raw video → transcoding workers (parallel DAG) → CDN. Adaptive bitrate (HLS/DASH). CDN pre-seeding."},
-      {n:"Fri",t:"Google Drive: chunking (4MB), dedup (hash chunks), delta sync (only changed chunks), conflict resolution."}
+    hld:{label:"HLD — Key Technologies I: Redis + Kafka + Elasticsearch",hrs:"~3hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Redis. Not just a cache: pub/sub, sorted sets (leaderboards), distributed locks (SETNX+TTL), TTL-based rate limiting. Know which Redis data structure solves which problem."},
+      {n:"Fri",t:"📖 Hello Interview → Kafka. Topics, partitions, consumer groups, offsets, delivery semantics (at-least-once/exactly-once). Then: Elasticsearch — inverted index, sharding for search, when to use vs SQL LIKE."},
+      {n:"Practice",t:"Fri evening 60min: YouTube full design — raw video → transcoding workers (DAG) → CDN. Adaptive bitrate (HLS/DASH). Uses Redis, Kafka, CDN — connect all three."},
+      {n:"Note",t:"These three technologies appear in the majority of Google-relevant question breakdowns. This week is high ROI."}
     ]},
-    revision:{dsa:["2D DP — recode Maximal Square + Interleaving String cold","Interval DP — recode Burst Balloons cold (this is your 2nd rep — 35min target)","DSU — full recode with rank+path compression, under 5min"],lld:["Chess — recode Piece hierarchy + getValidMoves() for Knight cold","Ride Sharing — recode full State machine + Strategy dispatch cold"],hld:["YouTube — redraw transcoding pipeline + CDN seeding cold","Google Drive — explain chunk dedup + delta sync; draw the conflict resolution flow"],note:"By W8: LLD recoding should feel like muscle memory, not a puzzle. If a design takes >50min to recode, it's still shaky."},
+    revision:{dsa:["2D DP — recode Maximal Square + Interleaving String cold","Interval DP — recode Burst Balloons cold (this is your 2nd rep — 35min target)","DSU — full recode with rank+path compression, under 5min"],lld:["Ride Sharing — recode full State machine + Strategy dispatch cold","Chess — recode Piece hierarchy + getValidMoves() for Knight cold"],hld:["WhatsApp Chat — redraw full architecture cold: WebSocket, message store, offline delivery, group fan-out","News Feed — redraw fan-out on write/read/hybrid from memory. Celebrity threshold?"],note:"By W8: LLD recoding should feel like muscle memory, not a puzzle. If a design takes >50min to recode, it's still shaky."},
     contest:"Contest + 1hr upsolve. Self-check: finishing Q1+Q2 in <25min consistently?",
     mock:"1 interviewing.io DSA mock (paid, ex-FAANG). 1 HLD mock: 'Design Dropbox' 45min. Debrief both in writing."
   },
   {
-    title:"Week 9 — Autocomplete + LLD Cold Mocks",dates:"April 26 – May 2",focus:"DSA: Consolidation + Hard | LLD: Cold Mock Mode | HLD: Autocomplete + Web Crawler",
+    title:"Week 9 — Autocomplete + LLD Cold Mocks",dates:"April 26 – May 2",focus:"DSA: Consolidation + Hard | LLD: Cold Mock Mode | HLD: Cassandra + DynamoDB + API Gateway + Q Breakdowns",
     dsa:{label:"DSA — Consolidation + Hard",hrs:"~10hrs",sections:[
       {label:"Mon–Tue · Weak Area Revisit",probs:[]},
       {label:"Thu · More Google Hard",probs:[{n:"Smallest Range K Lists",lc:"#632",hi:1},{n:"MK Average",lc:"#2062",hi:1},{n:"Regular Expr Match",lc:"#10"},{n:"Alien Dictionary",lc:"#269",hi:1}]},
@@ -560,11 +565,12 @@ const WEEKS = [
       {n:"Sat",t:"Cold: ATM Machine (45min). Focus on State + Command for transactions."},
       {n:"Bar",t:"By now: identify patterns and class hierarchies in first 5 minutes of any design problem."}
     ]},
-    hld:{label:"HLD — Autocomplete + Web Crawler",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"Autocomplete: Trie + top-K at each node, frequency via Kafka→Spark batch, shard Trie by first char"},
-      {n:"Fri",t:"Web Crawler: BFS URL frontier, bloom filter dedup, politeness (robots.txt, rate limits per domain)"}
+    hld:{label:"HLD — Key Technologies II + Question Breakdowns Start",hrs:"~3hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → Cassandra (wide-column, tunable consistency W+R>N, when NOT to use — no joins, no transactions) + DynamoDB (partition key design, GSI, single-table design, when to pick over Cassandra)."},
+      {n:"Fri",t:"📖 Hello Interview → API Gateway (auth, rate limiting, routing, circuit breaker). Then: Google Drive full design (60min) — chunking, dedup via content hash, delta sync, conflict resolution."},
+      {n:"Practice",t:"Sat: Question Breakdowns — attempt Bit.ly, Rate Limiter, Typeahead/Autocomplete cold. 35min each. No hints first 20min. This is your first timed Q Breakdown practice."}
     ]},
-    revision:{dsa:["Speed revision: 8 problems cold (pick from your shakiest notes), 20min each","Pattern sheet: re-read all 30+ patterns; mark any that still feel uncertain"],lld:["Splitwise — recode debt graph simplification algo cold (this is hard — budget 50min)","Elevator — recode SCAN with multi-elevator dispatcher cold"],hld:["Autocomplete — draw Trie + Kafka batch + shard-by-first-char cold","Web Crawler — explain bloom filter dedup + politeness policy cold"],note:"W9 is last full revision week. By Sunday: every LLD design in your list should be recodeable cold in <50min."},
+    revision:{dsa:["Speed revision: 8 problems cold (pick from your shakiest notes), 20min each","Pattern sheet: re-read all 30+ patterns; mark any that still feel uncertain"],lld:["Splitwise — recode debt graph simplification algo cold (this is hard — budget 50min)","Elevator — recode SCAN with multi-elevator dispatcher cold"],hld:["Redis — explain 3 use cases from memory (cache, distributed lock, leaderboard) with data structures","YouTube — redraw full pipeline cold: upload → transcode → CDN. Explain Kafka role."],note:"W9 is last full revision week. By Sunday: every LLD design in your list should be recodeable cold in <50min."},
     contest:"Contest + 1hr upsolve. Check your LC rating — should be approaching 1850+ by now.",
     mock:"2 Pramp DSA mocks. 1 HLD mock: 'Design Twitter Search'. Sat: write 6 STAR stories (30min) — Behavioral tab has prompts."
   },
@@ -578,11 +584,12 @@ const WEEKS = [
       {n:"Wed",t:"For each of 10 designs: 5min verbal walkthrough. Can you name patterns, key classes, one concurrency note?"},
       {n:"Note",t:"Don't recode anything. Verbal fluency is the last mile of LLD prep."}
     ]},
-    hld:{label:"HLD — Trade-off Drilling",hrs:"~4hrs",steps:[
-      {n:"Thu",t:"For each system, answer cold: 'Why not just PostgreSQL?' / 'SPOF?' / '10x spike tomorrow?' / '10x budget?'"},
-      {n:"Note",t:"Crisp trade-off answers are what separate 'hire' from 'strong hire' in HLD rounds."}
+    hld:{label:"HLD — Key Technologies III + Question Breakdowns Blitz",hrs:"~4hrs",steps:[
+      {n:"Thu",t:"📖 Hello Interview → ZooKeeper ⭐ optional + Flink ⭐ optional. Low priority — skip if time-pressed and use the slot for extra question breakdown practice instead."},
+      {n:"Fri",t:"Question Breakdowns: YouTube (already done W8), FB News Feed, Uber, Web Crawler — one full verbal design each (35min). Talk out loud the entire time."},
+      {n:"Trade-offs",t:"For each system you've designed, answer cold: 'Why not just PostgreSQL?' / 'SPOF?' / '10x traffic spike tomorrow?' / '10x budget cut?' Crisp trade-off answers = the difference between hire and strong hire."}
     ]},
-    revision:{dsa:["Final pass: re-read your pattern sheet. Annotate any pattern still feeling loose.","Pick 5 problems you struggled with most across 10 weeks — recode them one last time."],lld:["Verbal-only: for each design, 5min walkthrough. Name patterns, edge cases, concurrency note.","No recoding this week — verbal fluency is the last mile."],hld:["Trade-off drill: for each system answer cold: 'Why not SQL?', 'SPOF?', '10x spike?' etc."],note:"W10 is polish only. Trust the 9 weeks of work. Your goal this week is to feel calm, not cramming."},
+    revision:{dsa:["Final pass: re-read your pattern sheet. Annotate any pattern still feeling loose.","Pick 5 problems you struggled with most across 10 weeks — recode them one last time."],lld:["Verbal-only: for each design, 5min walkthrough. Name patterns, edge cases, concurrency note.","No recoding this week — verbal fluency is the last mile."],hld:["Question Breakdowns trade-off drill: for each system — 'Why not SQL?', 'SPOF?', '10x spike?'","Cassandra vs DynamoDB — explain out loud when to pick each. No notes."],note:"W10 is polish only. Trust the 9 weeks of work. Your goal this week is to feel calm, not cramming."},
     contest:"Final contest. Reflect: how far from March 1? That progress is real.",
     mock:"SATURDAY FULL ONSITE SIM: 9am DSA Mock, 10:15am DSA Mock, 11:30am HLD Mock, 12:15pm Behavioral Mock. Debrief all."
   },
@@ -590,7 +597,7 @@ const WEEKS = [
     title:"Week 11+ — Interview Period",dates:"May 10 onwards",focus:"Light maintenance only. Trust the work.",
     dsa:{label:"DSA — Maintenance",hrs:"30-45min/day",sections:[],note:"1–2 solved mediums/day for speed. Read pattern sheet every morning. NO new hard problems — risk/reward is bad this late."},
     lld:{label:"LLD — Verbal Only",hrs:"",steps:[{n:"Pre",t:"Day before interview: verbally walk 2 LLD designs you're most confident in. Requirements → entities → patterns → code."}]},
-    hld:{label:"HLD — Quick Review",hrs:"",steps:[{n:"Pre",t:"Day before: re-read TinyURL and News Feed notes. Review the framework: clarify→estimate→design→deep dive→trade-offs."},{n:"→",t:"Sleep 8 hours. Seriously."}]},
+    hld:{label:"HLD — Quick Review",hrs:"",steps:[{n:"Pre",t:"Day before interview: re-read your Hello Interview notes for the 2 systems you feel shakiest on. Review the framework: clarify→estimate→design→deep dive→trade-offs. Know your patterns by name."},{n:"→",t:"Sleep 8 hours. Seriously."}]},
     revision:{dsa:["Day before interview: recode 1 problem from each shaky topic — 15min each, quick warm-up only"],lld:["Day before: verbal walkthrough of 2 LLD designs you're most confident in"],hld:["Day before: re-read TinyURL and News Feed notes. Review the HLD framework."],note:"Interview period: light revision only. 1 LLD verbal walk + 1 HLD sketch per day max."},
     contest:"Keep attending contests to stay sharp. Don't grind.",
     mock:"Light mocks only if you feel rusty. Don't overdo it."
@@ -668,10 +675,30 @@ const LLD_TRACKER = [
   "Parking Lot ✅","Tic Tac Toe ✅"
 ];
 
-const HLD_TRACKER = [
-  "TinyURL (full design)","Rate Limiter","Key-Value Store","Twitter/News Feed","WhatsApp Chat System",
-  "YouTube","Google Drive","Search Autocomplete","Web Crawler","Notification System HLD","Unique ID Generator"
-];
+const HLD_TRACKER = {
+  coreConcepts: [
+    "Networking Essentials","API Design","Data Modeling","DB Indexing","Caching",
+    "Sharding & Partitioning","Consistent Hashing","CAP Theorem","Numbers to Know"
+  ],
+  patterns: [
+    "Real-time Updates","Dealing with Contention","Multi-step Processes",
+    "Scaling Reads","Scaling Writes","Handling Large Blobs","Managing Long Running Tasks"
+  ],
+  keyTechnologies: [
+    "Redis","Elasticsearch","Kafka","API Gateway","Cassandra",
+    "DynamoDB","PostgreSQL","Flink ⭐ optional","ZooKeeper ⭐ optional"
+  ],
+  questionBreakdowns: [
+    "Bit.ly / TinyURL","Rate Limiter","WhatsApp / Messenger","Facebook News Feed",
+    "YouTube","Uber / Lyft","Web Crawler","Twitter Search","Google Drive",
+    "Notification System","Unique ID Generator","Typeahead / Autocomplete",
+    "Key-Value Store","Distributed Message Queue","Distributed Cache","Payment System",
+    "Local Delivery (DoorDash)","Hotel Reservation","Stock Exchange",
+    "Ad Click Event Aggregation","Distributed Job Scheduler","Digital Wallet",
+    "S3 / Object Storage","Email Service","Proximity Service / Yelp",
+    "Nearby Friends","Google Maps","Metrics Monitoring"
+  ]
+};
 
 const REAL_QUESTIONS = [
   {company:"google",type:"dsa",title:"Cloud Storage Snapshot Deletion",question:"You're managing a cloud storage system with disks and snapshots. A snapshot can only be deleted once all disks created from it (and their children) are safely deleted. Given a list of disk and snapshot objects, return the sequence of disk deletions that safely removes all disks.",pattern:"Topological Sort (dependency graph)",difficulty:"hard",round:"Onsite Round 1",source:"Medium — Google India Interview Experience 2025",sourceType:"medium",tags:["Graph","Topological Sort","DFS"]},
@@ -881,13 +908,24 @@ function renderTracker() {
   });
   html += `</div></div></div>`;
 
-  // HLD
-  html += `<div class="progress-section" id="sec-hld"><div class="ps-head" onclick="toggleSec(this)"><div class="ps-title"><span class="leg-dot" style="background:var(--hld);width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0"></span>HLD Systems</div><div style="display:flex;gap:12px;align-items:center"><span class="ps-count" id="cnt-hld">0/11</span><span class="toggle-icon">▾</span></div></div><div class="ps-body"><div class="check-grid" style="margin-top:8px">`;
-  HLD_TRACKER.forEach((item,i)=>{
-    const id = `hld-${i}`;
-    html += `<div class="check-item" id="ci-${id}"><input type="checkbox" id="${id}" onchange="updateProgress()" data-type="hld"><label for="${id}">${item}</label></div>`;
+  // HLD — Hello Interview (4 layers, 53 items)
+  const hldSections = [
+    {key:"coreConcepts",  label:"Core Concepts",     count:9,  color:"#60a5fa", note:"W1–4 · Foundation for all system designs"},
+    {key:"patterns",      label:"Patterns",           count:7,  color:"#a78bfa", note:"W5–7 · How to solve each problem class"},
+    {key:"keyTechnologies",label:"Key Technologies",  count:9,  color:"#34d399", note:"W8–9 · Redis · Kafka · Cassandra · more"},
+    {key:"questionBreakdowns",label:"Question Breakdowns", count:28, color:"#fbbf24", note:"W9–10 · Full system designs, Google-prioritised"}
+  ];
+  html += `<div class="progress-section" id="sec-hld"><div class="ps-head" onclick="toggleSec(this)"><div class="ps-title"><span class="leg-dot" style="background:var(--hld);width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0"></span>HLD — Hello Interview</div><div style="display:flex;gap:12px;align-items:center"><span class="ps-count" id="cnt-hld">0/53</span><span class="toggle-icon">▾</span></div></div><div class="ps-body">`;
+  hldSections.forEach(sec => {
+    html += `<div class="slabel" style="margin-top:14px;display:flex;justify-content:space-between;align-items:center"><span style="color:${sec.color}">${sec.label} <span style="color:var(--muted);font-weight:400">· ${sec.note}</span></span><span style="color:var(--muted);font-size:.6rem" id="cnt-hld-${sec.key}">0/${sec.count}</span></div><div class="check-grid">`;
+    HLD_TRACKER[sec.key].forEach((item,i) => {
+      const id = `hld-${sec.key}-${i}`;
+      const optional = item.includes('optional');
+      html += `<div class="check-item" id="ci-${id}"><input type="checkbox" id="${id}" onchange="updateProgress()" data-type="hld" data-sub="${sec.key}"><label for="${id}" style="${optional?'color:var(--muted)':''}">${item}</label></div>`;
+    });
+    html += `</div>`;
   });
-  html += `</div></div></div>`;
+  html += `</div></div>`;
 
   container.innerHTML = html;
   loadProgress();
@@ -1033,7 +1071,7 @@ function toggleBeh(el) {
 }
 
 function updateProgress() {
-  const types = {dsa:{total:106, ids:[]}, lld:{total:12, ids:[]}, hld:{total:11, ids:[]}};
+  const types = {dsa:{total:106, ids:[]}, lld:{total:12, ids:[]}, hld:{total:53, ids:[]}};
   document.querySelectorAll('input[type=checkbox]').forEach(cb => {
     const t = cb.dataset.type;
     if(t && types[t]) types[t].ids.push({cb, checked: cb.checked});
@@ -1046,6 +1084,13 @@ function updateProgress() {
     document.getElementById(`${t}-bar`).style.width = `${Math.round(checked/total*100)}%`;
     const cnt = document.getElementById(`cnt-${t}`);
     if(cnt) cnt.textContent = `${checked}/${total}`;
+  });
+  // HLD sub-section counters
+  ['coreConcepts','patterns','keyTechnologies','questionBreakdowns'].forEach(sub => {
+    const subChecked = document.querySelectorAll(`input[data-sub="${sub}"]:checked`).length;
+    const subTotal = HLD_TRACKER[sub].length;
+    const el = document.getElementById(`cnt-hld-${sub}`);
+    if(el) el.textContent = `${subChecked}/${subTotal}`;
   });
 
   document.querySelectorAll('.check-item').forEach(ci => {
